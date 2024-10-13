@@ -3,11 +3,11 @@ import { TextField, Button, Box } from "@mui/material";
 import logo from "../../assets/Union.svg";
 import { FcGoogle } from "react-icons/fc";
 import heroImg from "../../assets/Frame 41.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usePostDataMutation } from "../../redux/api/register-api";
 
 type FormData = {
-  name: string;
+  full_name: string;
   username: string;
   email: string;
   password: string;
@@ -15,7 +15,7 @@ type FormData = {
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    name: "",
+    full_name: "",
     username: "",
     email: "",
     password: "",
@@ -27,11 +27,14 @@ const SignUp: React.FC = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const navigate = useNavigate();
+
   const [postData] = usePostDataMutation();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postData(formData);
     console.log("Sign-up data:", formData);
+    navigate("/login");
   };
 
   return (
@@ -66,10 +69,10 @@ const SignUp: React.FC = () => {
           }}
         >
           <TextField
-            label="Name"
+            label="Full Name"
             variant="outlined"
-            name="name"
-            value={formData.name}
+            name="full_name"
+            value={formData.full_name}
             onChange={handleChange}
             fullWidth
             margin="normal"

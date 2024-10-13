@@ -3,7 +3,8 @@ import { TextField, Button, Box } from "@mui/material";
 import logo from "../../assets/Union.svg";
 import { FcGoogle } from "react-icons/fc";
 import heroImg from "../../assets/Frame 41.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../redux/api/register-api";
 
 type FormData = {
   username: string;
@@ -16,6 +17,9 @@ const Login: React.FC = () => {
     password: "",
   });
 
+  const [login] = useLoginMutation();
+  const navigate = useNavigate();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -23,21 +27,23 @@ const Login: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Login data:", formData);
+    const response = await login(formData).unwrap();
+
+    localStorage.setItem("token", response.accessToken);
+
+    navigate("/");
   };
 
   return (
     <div className="flex items-center justify-between bg-black w-full h-screen p-6 lg:p-10">
       <div className="flex flex-col justify-center w-full lg:w-1/2 h-full">
-        {/* Логотип */}
         <div className="flex items-center justify-center mb-8">
           <img src={logo} alt="Logo" className="w-[30px] h-[30px] mr-2" />
           <span className="text-[36px] text-white font-semibold">Snapgram</span>
         </div>
 
-        {/* Заголовок */}
         <div className="text-center text-white mb-10">
           <h3 className="text-4xl font-bold">Log in to your account</h3>
           <p className="text-gray-400 mt-2">
@@ -45,7 +51,6 @@ const Login: React.FC = () => {
           </p>
         </div>
 
-        {/* Форма входа */}
         <Box
           component="form"
           onSubmit={handleSubmit}

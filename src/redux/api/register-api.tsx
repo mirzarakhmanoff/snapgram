@@ -1,6 +1,6 @@
 import { api } from "./index";
 
-export const registerApi = api.injectEndpoints({
+export const authApi = api.injectEndpoints({
   endpoints: (build) => ({
     postData: build.mutation({
       query: (data: object) => ({
@@ -10,7 +10,15 @@ export const registerApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Auth"],
     }),
+    login: build.mutation({
+      query: (data: object) => ({
+        url: `/api/auth/login`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
-export const { usePostDataMutation } = registerApi;
+export const { usePostDataMutation, useLoginMutation } = authApi; // Экспорт новой мутации
