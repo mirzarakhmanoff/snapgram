@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import { TextField, Button, Box } from "@mui/material";
 import logo from "../../assets/Union.svg";
 import { FcGoogle } from "react-icons/fc";
 import heroImg from "../../assets/Frame 41.png";

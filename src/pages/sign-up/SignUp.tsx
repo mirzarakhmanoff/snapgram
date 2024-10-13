@@ -27,7 +27,7 @@ const SignUp: React.FC = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const [postData, { isLoading, isError, error }] = usePostDataMutation();
+  const [postData] = usePostDataMutation();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postData(formData);
