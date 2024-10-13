@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
 const baseQuery = async (args: any, api: any, extraOptions: any) => {
   // const { dispatch } = api
   const rawBaseQuery = fetchBaseQuery({
-    baseUrl: "https://dummyjson.com",
+    baseUrl: "https://sea-turtle-app-c2icp.ondigitalocean.app",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("x-auth-token");
       if (token) {
@@ -30,6 +30,6 @@ const baseQueryWithRetry = retry(baseQuery, { maxRetries: 0 });
 export const api = createApi({
   reducerPath: "myApi",
   baseQuery: baseQueryWithRetry,
-  tagTypes: ["Product"],
+  tagTypes: ["Product", "Auth"],
   endpoints: () => ({}),
 });

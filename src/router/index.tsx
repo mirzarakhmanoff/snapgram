@@ -1,44 +1,63 @@
-import { lazy, LazyExoticComponent } from "react"
-import {useRoutes} from "react-router-dom"
-import { SuspenseComponent as Suspense } from "../utils"
+import { lazy, LazyExoticComponent } from "react";
+import { useRoutes } from "react-router-dom";
+import { SuspenseComponent as Suspense } from "../utils";
+import Login from "../pages/login/Login";
+import SignUp from "../pages/sign-up/SignUp";
+import Auth from "../components/auth/Auth";
 
-const Home: LazyExoticComponent<any>  = lazy(()=> import('../pages/home/Home'))
-const About: LazyExoticComponent<any> = lazy(()=> import("../pages/about/About"))
-const Company: LazyExoticComponent<any> = lazy(()=> import("../pages/company/Company"))
-const Detail: LazyExoticComponent<any> = lazy(()=> import("../pages/detail/Detail"))
-const Layout: LazyExoticComponent<any> = lazy(()=> import("../pages/layout/Layout"))
+const Home: LazyExoticComponent<any> = lazy(() => import("../pages/home/Home"));
 
-const Routers = ()=>{
-    return useRoutes([
+const Layout: LazyExoticComponent<any> = lazy(
+  () => import("../pages/layout/Layout")
+);
+
+const Routers = () => {
+  return useRoutes([
+    {
+      path: "/",
+      element: (
+        <Suspense>
+          <Layout />
+        </Suspense>
+      ),
+      children: [
         {
-            path: "/",
-            element: <Suspense><Layout/></Suspense>,
-            children: [
-                {
-                    path: "/",
-                    element: <Suspense><Home/></Suspense>
-                },
-                {
-                    path:"/about",
-                    element: <Suspense><About/></Suspense>,
-                    children: [
-                        {
-                            path: "company",
-                            element: <Suspense><Company/></Suspense>
-                        },
-                    ]
-                },
-                {
-                    path: "/product/:id",
-                    element: <Suspense><Detail/></Suspense>
-                },
-            ]
+          path: "/",
+          element: (
+            <Auth>
+              <Suspense>
+                <Home />
+              </Suspense>
+            </Auth>
+          ),
         },
-        {
-            path: "*",
-            element: <Suspense><h2>404</h2></Suspense>
-        }
-    ])
-}
+      ],
+    },
+    {
+      path: "*",
+      element: (
+        <Suspense>
+          <h2>404</h2>
+        </Suspense>
+      ),
+    },
+    {
+      path: "/login",
+      element: (
+        <Suspense>
+          <Login />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/sign-up",
+      element: (
+        <Suspense>
+          <SignUp />
+        </Suspense>
+      ),
+    },
+  ]);
+};
 
-export default Routers
+export default Routers;
