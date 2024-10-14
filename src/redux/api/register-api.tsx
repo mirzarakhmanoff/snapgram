@@ -21,4 +21,4 @@ export const authApi = api.injectEndpoints({
   }),
 });
 
-export const { usePostDataMutation, useLoginMutation } = authApi; // Экспорт новой мутации
+export const { usePostDataMutation, useLoginMutation } = authApi;
