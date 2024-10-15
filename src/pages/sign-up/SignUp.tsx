@@ -5,13 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import heroImg from "../../assets/Frame 41.png";
 import { Link, useNavigate } from "react-router-dom";
 import { usePostDataMutation } from "../../redux/api/register-api";
-
-type FormData = {
-  full_name: string;
-  username: string;
-  email: string;
-  password: string;
-};
+import { FormData } from "../../types";
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({

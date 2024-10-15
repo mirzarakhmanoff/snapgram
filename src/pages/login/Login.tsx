@@ -5,14 +5,10 @@ import { FcGoogle } from "react-icons/fc";
 import heroImg from "../../assets/Frame 41.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../redux/api/register-api";
-
-type FormData = {
-  username: string;
-  password: string;
-};
+import { FormLogin } from "../../types";
 
 const Login: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormLogin>({
     username: "",
     password: "",
   });
