@@ -1,4 +1,5 @@
 import Creators from "../../components/creators/Creators";
+import HomeFeed from "../../components/HomeFeed/HomeFeed";
 import SideBar from "../../components/SideBar/SideBar";
 import Stories from "../../components/stories/Stories";
 
@@ -12,6 +13,7 @@ const Home = () => {
       <div className="flex-1 ml-[270px] mr-[465px] pt-6">
         {" "}
         <Stories />
+        {/* <HomeFeed /> */}
       </div>
 
       <div className="w-[465px] h-screen fixed right-0 top-0">
