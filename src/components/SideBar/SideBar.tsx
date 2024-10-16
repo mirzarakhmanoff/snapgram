@@ -24,13 +24,17 @@ const SideBar = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen((p) => !p);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleRemove = () => {
     localStorage.removeItem("token");
     window.location.reload();
+    handleClose();
   };
   const { data } = useGetProfileQuery({});
 
@@ -118,7 +122,7 @@ const SideBar = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleRemove} autoFocus>
             Logout
           </Button>
         </DialogActions>
