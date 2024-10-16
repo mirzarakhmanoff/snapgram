@@ -10,6 +10,13 @@ export const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Auth"],
     }),
+    getUser: build.query({
+      query: (params) => ({
+        url: `/api/user/all`,
+        method: "GET",
+        params,
+      }),
+    }),
     login: build.mutation({
       query: (data: object) => ({
         url: `/api/auth/login`,
@@ -21,4 +28,5 @@ export const authApi = api.injectEndpoints({
   }),
 });
 
-export const { usePostDataMutation, useLoginMutation } = authApi;
+export const { usePostDataMutation, useLoginMutation, useGetUserQuery } =
+  authApi;

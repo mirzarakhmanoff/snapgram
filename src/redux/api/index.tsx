@@ -6,7 +6,7 @@ const baseQuery = async (args: any, api: any, extraOptions: any) => {
   const rawBaseQuery = fetchBaseQuery({
     baseUrl: "https://sea-turtle-app-c2icp.ondigitalocean.app",
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem("x-auth-token");
+      const token = localStorage.getItem("token");
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }

@@ -1,5 +1,4 @@
 import Creators from "../../components/creators/Creators";
-import HomeFeed from "../../components/HomeFeed/HomeFeed";
 import SideBar from "../../components/SideBar/SideBar";
 import Stories from "../../components/stories/Stories";
 
@@ -16,7 +15,7 @@ const Home = () => {
         {/* <HomeFeed /> */}
       </div>
 
-      <div className="w-[465px] h-screen fixed right-0 top-0">
+      <div className="w-[465px] h-screen fixed overflow-scroll right-0 top-0">
         <Creators />
       </div>
     </div>
