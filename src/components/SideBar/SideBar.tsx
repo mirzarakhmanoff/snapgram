@@ -11,8 +11,11 @@ import icon6 from "../../assets/Gallery Add.svg";
 import icon7 from "../../assets/Logout 3.svg";
 import icon8 from "../../assets/Settings.svg";
 import icon9 from "../../assets/Wallpaper.svg";
+import { useGetProfileQuery } from "../../redux/api/register-api";
 
 const SideBar = () => {
+  const { data } = useGetProfileQuery({});
+
   return (
     <div className="bg-black h-screen w-64 p-6 ">
       <div className="mb-5 ">
@@ -26,11 +29,11 @@ const SideBar = () => {
           <img src={profile} alt="Profile" className="w-12 h-12 rounded-full" />
         </div>
         <div className="text-center">
-          <h5 className="text-[16px] text-white font-semibold">
-            Lewis Hamilton
+          <h5 className="text-[10px] text-white font-semibold">
+            {data?.fullName}
           </h5>
           <a href="#" className="text-gray-400 text-sm">
-            @Lewishamilton
+            {`@${data?.username}`}
           </a>
         </div>
       </div>

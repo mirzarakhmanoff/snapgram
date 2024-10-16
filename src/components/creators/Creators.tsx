@@ -1,25 +1,24 @@
-// import stories1 from "../../assets/storyImg.jpeg";
-// import stories2 from "../../assets/storiImg2.jpeg";
-// import stories3 from "../../assets/storyImg2.jpeg";
-// import stories4 from "../../assets/storyImg3.jpeg";
-// import stories5 from "../../assets/storyImg4.jpeg";
-// import stories6 from "../../assets/storyImg5.jpeg";
-import { useGetUserQuery } from "../../redux/api/register-api";
-
-// const defaultImages = [
-//   stories1,
-//   stories2,
-//   stories3,
-//   stories4,
-//   stories5,
-//   stories6,
-// ];
+import {
+  useFollowMutation,
+  useGetUserQuery,
+  useUnfollowMutation,
+} from "../../redux/api/register-api";
 
 const Creators = () => {
-  const { data, isLoading, error } = useGetUserQuery({});
+  const { data, isLoading, error } = useGetUserQuery({ limit: 100 });
+  const [follow] = useFollowMutation();
+  const [unfollow] = useUnfollowMutation();
 
+  const currentUserId = "670f437d9327e9451b09f8fa";
   if (isLoading) return <div className="text-white">Loading...</div>;
   if (error) return <div className="text-red-500">Error loading data</div>;
+
+  const followUser = (username: string) => {
+    follow(username);
+  };
+  const unfollowUser = (username: string) => {
+    unfollow(username);
+  };
 
   return (
     <div className="bg-black p-6">
@@ -39,10 +38,22 @@ const Creators = () => {
               className="w-24 h-24 rounded-full mb-2"
             />
             <h3 className="text-white">{user.username}</h3>
-            <p className="text-gray-400">{user.email}</p>
-            <button className="mt-2 bg-purple-600 text-white rounded-full px-4 py-1 hover:bg-purple-700 transition-all">
-              Follow
-            </button>
+            <p className="text-gray-400 text-[12px]">{user.email}</p>
+            {user.followers?.some((item: any) => item._id === currentUserId) ? (
+              <button
+                onClick={() => unfollowUser(user.username)}
+                className="mt-2 bg-red-600 text-white rounded-full px-4 py-1 hover:bg-red-700 transition-all"
+              >
+                Unfollow
+              </button>
+            ) : (
+              <button
+                onClick={() => followUser(user.username)}
+                className="mt-2 bg-purple-600 text-white rounded-full px-4 py-1 hover:bg-purple-700 transition-all"
+              >
+                Follow
+              </button>
+            )}
           </div>
         ))}
       </div>

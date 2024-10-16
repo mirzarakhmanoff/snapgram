@@ -17,6 +17,13 @@ export const authApi = api.injectEndpoints({
         params,
       }),
     }),
+    getProfile: build.query({
+      query: (params) => ({
+        url: `/api/user/profile`,
+        method: "GET",
+        params,
+      }),
+    }),
     login: build.mutation({
       query: (data: object) => ({
         url: `/api/auth/login`,
@@ -25,8 +32,30 @@ export const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Auth"],
     }),
+    follow: build.mutation({
+      query: (username) => ({
+        url: `/api/user/follow/${username}`,
+        method: "POST",
+        body: username,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
+    unfollow: build.mutation({
+      query: (username) => ({
+        url: `/api/user/unfollow/${username}`,
+        method: "POST",
+        body: username,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
-export const { usePostDataMutation, useLoginMutation, useGetUserQuery } =
-  authApi;
+export const {
+  usePostDataMutation,
+  useLoginMutation,
+  useGetUserQuery,
+  useFollowMutation,
+  useUnfollowMutation,
+  useGetProfileQuery,
+} = authApi;
