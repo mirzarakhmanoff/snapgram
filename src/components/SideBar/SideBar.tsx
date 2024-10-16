@@ -34,6 +34,11 @@ const SideBar = () => {
   };
   const { data } = useGetProfileQuery({});
 
+  if (data) {
+    localStorage.setItem("user", JSON.stringify(data));
+  } else {
+    <></>;
+  }
   return (
     <div className="bg-black h-screen w-64 p-6 ">
       <div className="mb-5">

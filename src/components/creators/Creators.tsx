@@ -5,19 +5,24 @@ import {
 } from "../../redux/api/register-api";
 
 const Creators = () => {
-  const { data, isLoading, error } = useGetUserQuery({ limit: 100 });
+  const { data, isLoading, error, refetch } = useGetUserQuery({ limit: 100 });
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
 
-  const currentUserId = "670f437d9327e9451b09f8fa";
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const currentUserId = user?._id;
+
   if (isLoading) return <div className="text-white">Loading...</div>;
   if (error) return <div className="text-red-500">Error loading data</div>;
 
-  const followUser = (username: string) => {
-    follow(username);
+  const followUser = async (username: string) => {
+    await follow(username);
+    refetch();
   };
-  const unfollowUser = (username: string) => {
-    unfollow(username);
+
+  const unfollowUser = async (username: string) => {
+    await unfollow(username);
+    refetch();
   };
 
   return (
@@ -38,8 +43,10 @@ const Creators = () => {
               className="w-24 h-24 rounded-full mb-2"
             />
             <h3 className="text-white">{user.username}</h3>
-            <p className="text-gray-400 text-[12px]">{user.email}</p>
-            {user.followers?.some((item: any) => item._id === currentUserId) ? (
+            <p className="text-gray-400">{user.email}</p>
+            {user.followers?.some(
+              (follower: any) => follower._id === currentUserId
+            ) ? (
               <button
                 onClick={() => unfollowUser(user.username)}
                 className="mt-2 bg-red-600 text-white rounded-full px-4 py-1 hover:bg-red-700 transition-all"
