@@ -21,9 +21,10 @@ const SignUp: React.FC = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const [postData] = usePostDataMutation();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postData(formData);
@@ -32,7 +33,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-between bg-black w-full h-screen p-6 lg:p-10">
+    <div className="flex flex-col lg:flex-row items-center justify-between bg-black w-full h-screen p-6 lg:p-10">
       <div className="flex flex-col justify-center w-full lg:w-1/2 h-full">
         <div className="flex items-center justify-center mb-8">
           <img src={logo} alt="Logo" className="w-[30px] h-[30px] mr-2" />
