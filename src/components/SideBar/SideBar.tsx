@@ -1,6 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/Union.svg";
 import profile from "../../assets/profile.png";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 import icon1 from "../../assets/Home.svg";
 import icon2 from "../../assets/Users Group Rounded.svg";
@@ -12,28 +17,39 @@ import icon7 from "../../assets/Logout 3.svg";
 import icon8 from "../../assets/Settings.svg";
 import icon9 from "../../assets/Wallpaper.svg";
 import { useGetProfileQuery } from "../../redux/api/register-api";
+import { Dialog } from "@mui/material";
+import React from "react";
 
 const SideBar = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
   const { data } = useGetProfileQuery({});
 
   return (
     <div className="bg-black h-screen w-64 p-6 ">
-      <div className="mb-5 ">
-        <Link to={"/"} className="flex gap-2 items-center text-white">
+      <div className="mb-5">
+        <Link to="/" className="flex gap-2 items-center text-white">
           <img src={logo} alt="Logo" className="w-8 h-8" />
           <p className="text-xl font-semibold">Snapgram</p>
         </Link>
       </div>
-      <div className="flex items-center  mb-3 gap-3">
-        <div>
-          <img src={profile} alt="Profile" className="w-12 h-12 rounded-full" />
-        </div>
+      <div className="flex items-center mb-3 gap-3">
+        <img src={profile} alt="Profile" className="w-12 h-12 rounded-full" />
         <div className="text-center">
           <h5 className="text-[10px] text-white font-semibold">
-            {data?.fullName}
+            {data?.fullName || "Unknown User"}
           </h5>
           <a href="#" className="text-gray-400 text-sm">
-            {`@${data?.username}`}
+            {`@${data?.username || "username"}`}
           </a>
         </div>
       </div>
@@ -63,18 +79,18 @@ const SideBar = () => {
           ))}
         </ul>
         <ul className="flex flex-col gap-3">
-          <li className="p-3 border border-transparent rounded-[8px] hover:bg-[#877EFF] hover:border-white">
-            <NavLink
-              to={"/logout"}
-              className="flex items-center gap-3 text-white transition-colors"
-            >
+          <li
+            onClick={handleClickOpen}
+            className="p-3 border border-transparent rounded-[8px] hover:bg-[#877EFF] hover:border-white"
+          >
+            <button className="flex items-center gap-3 text-white transition-colors">
               <img src={icon7} alt="Logout" className="w-6 h-6" />
               <span>Logout</span>
-            </NavLink>
+            </button>
           </li>
           <li className="p-3 border border-transparent rounded-[8px] hover:bg-[#877EFF] hover:border-white">
             <NavLink
-              to={"/settings"}
+              to="/settings"
               className="flex items-center gap-3 text-white transition-colors"
             >
               <img src={icon8} alt="Settings" className="w-6 h-6" />
@@ -83,6 +99,25 @@ const SideBar = () => {
           </li>
         </ul>
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Confirm Logout"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to log out?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose} autoFocus>
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

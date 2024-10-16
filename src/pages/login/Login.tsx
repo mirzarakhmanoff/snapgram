@@ -13,7 +13,7 @@ const Login: React.FC = () => {
     password: "",
   });
 
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,7 +99,7 @@ const Login: React.FC = () => {
               textTransform: "none",
             }}
           >
-            Login
+            {isLoading ? "Loading..." : "Login"}
           </Button>
 
           <button className="flex items-center justify-center w-full max-w-xs mx-auto mt-6 bg-white text-gray-700 border border-gray-300 rounded-md shadow-sm py-2 px-4 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
