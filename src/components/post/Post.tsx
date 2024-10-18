@@ -1,82 +1,116 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { useState } from "react";
+import { useGetPostsQuery } from "../../redux/api/file-api";
+
+interface PostType {
+  _id: string;
+  caption: string;
+  content_alt: string;
+  createdAt: string;
+  content: string[];
+  likes_count: number;
+  comments_count: number;
+  shares_count: number;
+}
 
 function Post() {
-  const post = {
-    user: {
-      avatar: "https://example.com/avatar.jpg",
-      name: "Lewis Hamilton",
-    },
-    date: "26 June at 09:32 PM",
-    text: "It's a big world out there - explore! #nature #mountains",
-    images: [
-      "https://example.com/image1.jpg",
-      "https://example.com/image2.jpg",
-    ],
-    likes: 120,
-    comments: 68,
-    shares: 74,
+  const { data } = useGetPostsQuery<{ posts: PostType[] }>([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
   };
 
   return (
-    <div className="twitter-post bg-white shadow-md rounded-lg p-4 mb-6">
-      <div className="post-header flex items-center mb-2">
-        <img
-          src={post.user.avatar}
-          alt="avatar"
-          className="w-10 h-10 rounded-full mr-3"
-        />
-        <div>
-          <span className="user-name font-semibold text-gray-800">
-            {post.user.name}
-          </span>
-          <span className="date text-gray-500 text-sm block">{post.date}</span>
-        </div>
-      </div>
-      <div className="post-content mb-4">
-        <p className="text-gray-700">{post.text}</p>
-        <Swiper
-          modules={[Pagination]}
-          spaceBetween={50}
-          pagination={{ clickable: true }}
-          className="my-4"
+    <div className="post-list bg-gray-900 p-4">
+      {data?.posts?.map((post) => (
+        <div
+          key={post._id}
+          className="twitter-post bg-gray-800 shadow-md rounded-lg p-4 mb-6"
         >
-          {post.images.map((image, index) => (
-            <SwiperSlide key={index}>
-              <img
-                src={image}
-                alt={`Post image ${index + 1}`}
-                className="w-full h-auto rounded-lg"
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-      <div className="post-actions flex justify-between text-gray-600 mb-4">
-        <div className="flex items-center">
-          <i className="fa fa-heart mr-1"></i>
-          <span>{post.likes}</span>
+          <div className="post-header flex items-center mb-2">
+            <img
+              src="https://example.com/default-avatar.jpg"
+              alt="avatar"
+              className="w-10 h-10 rounded-full mr-3"
+            />
+            <div>
+              <span className="user-name font-semibold text-white">
+                {post.caption}
+              </span>
+              <span className="date text-gray-400 text-sm block">
+                {new Date(post.createdAt).toLocaleString()}
+              </span>
+            </div>
+          </div>
+
+          <div className="post-content mb-4">
+            <p className="text-gray-300">{post.content_alt}</p>
+
+            {post.content.length > 0 && (
+              <div className="image-container my-4">
+                {post.content.map((imageUrl, index) => (
+                  <div key={index} className="relative w-full h-64 mb-2">
+                    <img
+                      src={imageUrl}
+                      alt={`Post content ${index + 1}`}
+                      className="w-full h-full rounded-lg cursor-pointer object-contain"
+                      onClick={() => handleImageClick(imageUrl)}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="post-actions flex justify-between text-gray-400 mb-4">
+            <div className="flex items-center">
+              <i className="fa fa-heart mr-1"></i>
+              <span>{post.likes_count}</span>
+            </div>
+            <div className="flex items-center">
+              <i className="fa fa-comment mr-1"></i>
+              <span>{post.comments_count}</span>
+            </div>
+            <div className="flex items-center">
+              <i className="fa fa-share mr-1"></i>
+              <span>{post.shares_count}</span>
+            </div>
+          </div>
+
+          <div className="comment-section">
+            <textarea
+              placeholder="Write your comment..."
+              className="w-full border border-gray-700 bg-gray-800 text-gray-300 rounded-lg p-2 mb-2"
+            />
+            <button className="bg-blue-600 text-white rounded-lg px-4 py-2">
+              Send
+            </button>
+          </div>
         </div>
-        <div className="flex items-center">
-          <i className="fa fa-comment mr-1"></i>
-          <span>{post.comments}</span>
+      ))}
+
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+          onClick={closeModal}
+        >
+          <div className="max-w-full max-h-full flex items-center justify-center">
+            <div className="relative">
+              <div className="zoomed-image-container">
+                <img
+                  src={selectedImage}
+                  alt="Zoomed"
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center">
-          <i className="fa fa-share mr-1"></i>
-          <span>{post.shares}</span>
-        </div>
-      </div>
-      <div className="comment-section">
-        <textarea
-          placeholder="Write your comment..."
-          className="w-full border rounded-lg p-2 mb-2"
-        />
-        <button className="bg-blue-500 text-white rounded-lg px-4 py-2">
-          Send
-        </button>
-      </div>
+      )}
     </div>
   );
 }

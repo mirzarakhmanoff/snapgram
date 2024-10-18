@@ -1,13 +1,20 @@
 import {
   useFollowMutation,
-  useGetUserQuery,
   useUnfollowMutation,
 } from "../../redux/api/register-api";
+import { FC } from "react";
 
-const Creators = () => {
-  const { data, isLoading, error, refetch } = useGetUserQuery({ limit: 100 });
+interface CreatorsProps {
+  creators: any[];
+  error: any;
+  isLoading: boolean;
+}
+
+const Creators: FC<CreatorsProps> = ({ creators, error, isLoading }) => {
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
+
+  if (isLoading) return <>loading...</>;
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const currentUserId = user?._id;
@@ -17,19 +24,19 @@ const Creators = () => {
 
   const followUser = async (username: string) => {
     await follow(username);
-    refetch();
+    // refetch();
   };
 
   const unfollowUser = async (username: string) => {
     await unfollow(username);
-    refetch();
+    // refetch();
   };
 
   return (
     <div className="bg-black p-6">
       <h2 className="text-2xl text-white mb-4">Top Creators</h2>
       <div className="grid grid-cols-2 gap-4">
-        {data?.map((user: any) => (
+        {creators?.map((user: any) => (
           <div
             key={user._id}
             className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center"

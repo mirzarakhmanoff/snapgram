@@ -25,9 +25,12 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await login(formData).unwrap();
-    localStorage.setItem("token", response.accessToken);
-    navigate("/");
+    await login(formData)
+      .unwrap()
+      .then((_) => {
+        localStorage.setItem("token", _.accessToken);
+        navigate("/");
+      });
   };
 
   return (

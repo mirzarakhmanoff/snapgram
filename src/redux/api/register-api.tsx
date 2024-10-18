@@ -16,6 +16,7 @@ export const authApi = api.injectEndpoints({
         method: "GET",
         params,
       }),
+      providesTags: ["User"],
     }),
     getProfile: build.query({
       query: (params) => ({
@@ -38,7 +39,7 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body: username,
       }),
-      invalidatesTags: ["Auth"],
+      invalidatesTags: ["Auth", "User"],
     }),
     unfollow: build.mutation({
       query: (username) => ({
@@ -46,7 +47,7 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body: username,
       }),
-      invalidatesTags: ["Auth"],
+      invalidatesTags: ["Auth", "User"],
     }),
   }),
 });
