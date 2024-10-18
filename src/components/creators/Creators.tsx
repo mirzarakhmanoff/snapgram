@@ -14,6 +14,13 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading }) => {
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
 
+  const truncateString = (str: string, num: number) => {
+    if (str.length > num) {
+      return str.slice(0, num) + "...";
+    }
+    return str;
+  };
+
   if (isLoading) return <>loading...</>;
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -24,12 +31,10 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading }) => {
 
   const followUser = async (username: string) => {
     await follow(username);
-    // refetch();
   };
 
   const unfollowUser = async (username: string) => {
     await unfollow(username);
-    // refetch();
   };
 
   return (
@@ -50,7 +55,8 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading }) => {
               className="w-24 h-24 rounded-full mb-2"
             />
             <h3 className="text-white">{user.username}</h3>
-            <p className="text-gray-400">{user.email}</p>
+            <p className="text-gray-400">{truncateString(user.email, 20)} </p>
+
             {user.followers?.some(
               (follower: any) => follower._id === currentUserId
             ) ? (
