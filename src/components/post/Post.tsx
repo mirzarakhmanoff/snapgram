@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useGetPostsQuery } from "../../redux/api/file-api";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
 
 interface PostType {
   _id: string;
@@ -54,17 +57,26 @@ function Post() {
             <p className="text-gray-300">{post.content_alt}</p>
 
             {post.content.length > 0 && (
-              <div className="image-container my-4">
-                {post.content.map((imageUrl, index) => (
-                  <div key={index} className="relative w-full h-64 mb-2">
-                    <img
-                      src={imageUrl}
-                      alt={`Post content ${index + 1}`}
-                      className="w-full h-full rounded-lg cursor-pointer object-contain"
-                      onClick={() => handleImageClick(imageUrl)}
-                    />
-                  </div>
-                ))}
+              <div className="image-container my-4  max-w-[600px] w-full">
+                <Swiper
+                  spaceBetween={50}
+                  slidesPerView={1}
+                  onSlideChange={() => console.log("slide change")}
+                  onSwiper={(swiper) => console.log(swiper)}
+                >
+                  {post.content.map((imageUrl, index) => (
+                    <SwiperSlide key={index}>
+                      <div key={index} className="relative w-full h-64 mb-2">
+                        <img
+                          src={imageUrl}
+                          alt={`Post content ${index + 1}`}
+                          className="w-full h-full rounded-lg cursor-pointer object-cover"
+                          onClick={() => handleImageClick(imageUrl)}
+                        />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
             )}
           </div>
