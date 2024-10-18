@@ -100,9 +100,13 @@ const SideBar = () => {
           <li className="p-3 border border-transparent rounded-[8px] hover:bg-[#877EFF] hover:border-white">
             <NavLink
               to="/settings"
-              className="flex items-center gap-3 text-white transition-colors"
+              className="flex items-center gap-3 text-white transition-colors group"
             >
-              <img src={icon8} alt="Settings" className="w-6 h-6" />
+              <img
+                src={icon8}
+                alt="Settings"
+                className="w-6 h-6 group-hover:brightness-0 group-hover:invert"
+              />
               <span>Settings</span>
             </NavLink>
           </li>
