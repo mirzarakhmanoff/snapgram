@@ -6,9 +6,9 @@ interface GeoTyes {
   city: string;
 }
 
-interface GeoHelperType {
-  types: string[];
-}
+// interface GeoHelperType {
+//   types: string[];
+// }
 const LocationDisplay = () => {
   const [location, setLocation] = useState<GeoTyes>({
     latitude: 0,

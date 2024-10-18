@@ -13,7 +13,7 @@ interface PostType {
 }
 
 function Post() {
-  const { data } = useGetPostsQuery<{ posts: PostType[] }>([]);
+  const { data, error, isLoading } = useGetPostsQuery({});
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handleImageClick = (imageUrl: string) => {
@@ -24,9 +24,12 @@ function Post() {
     setSelectedImage(null);
   };
 
+  if (isLoading) return <p className="text-white">Loading...</p>;
+  if (error) return <p className="text-red-500">Error loading posts.</p>;
+
   return (
     <div className="post-list bg-gray-900 p-4">
-      {data?.posts?.map((post) => (
+      {data?.posts?.map((post: PostType) => (
         <div
           key={post._id}
           className="twitter-post bg-gray-800 shadow-md rounded-lg p-4 mb-6"
