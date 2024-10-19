@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   useFollowMutation,
   useUnfollowMutation,
@@ -14,13 +15,22 @@ interface CreatorsProps {
 const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
-
-  const truncateString = (str: string, num: number) => {
-    if (str.length > num) {
-      return str.slice(0, num) + "...";
-    }
-    return str;
+  const onCopyEmail = (email: string) => {
+    navigator.clipboard.writeText(email);
+    alert(`Copied ${email}`);
   };
+  function truncateString(email: string) {
+    const [localPart, domain] = email.split("@");
+
+    if (localPart.length <= 6) {
+      return email;
+    }
+
+    const firstThree = localPart.slice(0, 3);
+    const lastTwo = localPart.slice(-2);
+
+    return `${firstThree}...${lastTwo}@${domain}`;
+  }
 
   if (isLoading) return <>loading...</>;
 
@@ -47,16 +57,26 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
             key={user._id}
             className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center w-[180px] "
           >
-            <img
-              src={
-                user.photo ||
-                "//i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
-              }
-              alt={user.name}
-              className="w-24 h-24 rounded-full mb-2"
-            />
-            <h3 className="text-white">{user.username}</h3>
-            <p className="text-gray-400">{truncateString(user.email, 20)} </p>
+            <Link to={`/profile/${user?.username}`}>
+              <div className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center w-[180px]">
+                <img
+                  src={
+                    user.photo ||
+                    "//i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
+                  }
+                  alt={user.name}
+                  className="w-24 h-24 rounded-full mb-2"
+                />
+                <h3 className="text-white">{user.username}</h3>
+              </div>
+            </Link>
+            <p
+              onClick={() => onCopyEmail(user.email)}
+              title={user.email}
+              className="text-gray-400 cursor-pointer"
+            >
+              {truncateString(user.email)}{" "}
+            </p>
 
             {user.followers?.some(
               (follower: any) => follower._id === currentUserId

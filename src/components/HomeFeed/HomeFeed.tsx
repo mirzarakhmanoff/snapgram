@@ -14,12 +14,12 @@ const HomeFeed = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !isFetching) {
           setLimit((prev) => prev + 10);
         }
       },
       {
-        threshold: 0.1,
+        threshold: 0.3,
       }
     );
 
@@ -33,10 +33,10 @@ const HomeFeed = () => {
         observer.unobserve(currentLoader);
       }
     };
-  }, []);
+  }, [isFetching]);
 
   useEffect(() => {
-    if (limit > 10) {
+    if (limit > 10 || !isFetching) {
       refetch();
     }
   }, [limit, refetch]);
@@ -53,15 +53,19 @@ const HomeFeed = () => {
           <GiHamburgerMenu />
         </div>
       </div>
+
       <Post data={data} />
+
       <div
         ref={loaderRef}
+        className="w-full h-[50px]"
         style={{
-          background: "transparent",
+          background: "black",
         }}
       />
+
       {isFetching && (
-        <div className="flex justify-center mt-4 h-14">
+        <div className="flex justify-center my-4 mx-auto h-14 w-[400px]">
           <ClipLoader color={"#fff"} loading={true} size={50} />
         </div>
       )}
