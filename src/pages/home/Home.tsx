@@ -6,7 +6,7 @@ import HomeFeed from "../../components/HomeFeed/HomeFeed";
 import { useEffect } from "react";
 
 const Home = () => {
-  const { data: creators, isLoading, error } = useGetUserQuery({ limit: 100 });
+  const { data: creators, isLoading, error } = useGetUserQuery({ limit: 6 });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +44,12 @@ const Home = () => {
       </div>
 
       <div className="w-[465px] h-screen fixed overflow-scroll right-0 top-0">
-        <Creators creators={creators} error={error} isLoading={isLoading} />
+        <Creators
+          creators={creators}
+          error={error}
+          isLoading={isLoading}
+          title={"New Users"}
+        />
       </div>
     </div>
   );

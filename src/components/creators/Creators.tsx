@@ -8,9 +8,10 @@ interface CreatorsProps {
   creators: any[];
   error: any;
   isLoading: boolean;
+  title: string;
 }
 
-const Creators: FC<CreatorsProps> = ({ creators, error, isLoading }) => {
+const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
 
@@ -39,12 +40,12 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading }) => {
 
   return (
     <div className="bg-black p-6">
-      <h2 className="text-2xl text-white mb-4">Top Creators</h2>
-      <div className="grid grid-cols-2 gap-4">
+      <h2 className="text-2xl text-white mb-4">{title}</h2>
+      <div className="flex flex-wrap gap-10 ">
         {creators?.map((user: any) => (
           <div
             key={user._id}
-            className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center"
+            className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center w-[180px] "
           >
             <img
               src={

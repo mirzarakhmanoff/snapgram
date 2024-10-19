@@ -5,6 +5,7 @@ import Login from "../pages/login/Login";
 import SignUp from "../pages/sign-up/SignUp";
 import Auth from "../components/auth/Auth";
 import NewPost from "../pages/newPost/NewPost";
+import People from "../pages/people/People";
 
 const Home: LazyExoticComponent<any> = lazy(() => import("../pages/home/Home"));
 
@@ -37,6 +38,14 @@ const Routers = () => {
           element: (
             <Suspense>
               <NewPost />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/people",
+          element: (
+            <Suspense>
+              <People />
             </Suspense>
           ),
         },

@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import { useGetPostsQuery } from "../../redux/api/file-api";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FaHeart, FaComment, FaShare, FaRegHeart } from "react-icons/fa";
+import { FaComment, FaShare, FaRegHeart } from "react-icons/fa";
 
 import "swiper/css";
 import avatar from "../../assets/avatarka.jpg";
 import { Pagination } from "swiper/modules";
+import { useState } from "react";
 
 interface PostType {
   _id: string;
