@@ -19,10 +19,12 @@ export const productApi = api.injectEndpoints({
       invalidatesTags: [],
     }),
     getPosts: build.query({
-      query: (params) => ({
-        url: "/api/user/feed?limit=100",
-        params,
-      }),
+      query: (params) => {
+        return {
+          url: `/api/user/feed`,
+          params,
+        };
+      },
       providesTags: [],
     }),
   }),

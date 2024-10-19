@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 body {
-  @apply font-sans;
-  background: #000;
+  @apply font-sans bg-black;
+  .swiper-pagination {
+    @apply flex items-center justify-center gap-1;
+    span {
+      @apply cursor-pointer;
+    }
+  }
 }

@@ -17,19 +17,19 @@ const Routers = () => {
     {
       path: "/",
       element: (
-        <Suspense>
-          <Layout />
-        </Suspense>
+        <Auth>
+          <Suspense>
+            <Layout />
+          </Suspense>
+        </Auth>
       ),
       children: [
         {
           path: "/",
           element: (
-            <Auth>
-              <Suspense>
-                <Home />
-              </Suspense>
-            </Auth>
+            <Suspense>
+              <Home />
+            </Suspense>
           ),
         },
         {

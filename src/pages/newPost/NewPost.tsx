@@ -4,15 +4,18 @@ import {
   useCreatePostMutation,
   useUploadFIleMutation,
 } from "../../redux/api/file-api";
+import { useNavigate } from "react-router-dom";
+import { FaSpinner } from "react-icons/fa";
 
 const NewPost = () => {
   const [caption, setCaption] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [altText, setAltText] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
-  const [uploadFiles] = useUploadFIleMutation();
+  const [uploadFiles, { isLoading }] = useUploadFIleMutation();
   const [createPost] = useCreatePostMutation();
 
+  const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +34,7 @@ const NewPost = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await handleUpload();
+    navigate("/");
     clearForm();
   };
 
@@ -59,7 +63,7 @@ const NewPost = () => {
     setAltText("");
     setFiles([]);
     if (fileInputRef.current) {
-      fileInputRef.current.value = ""; // Clear the file input
+      fileInputRef.current.value = "";
     }
   };
 
@@ -68,10 +72,10 @@ const NewPost = () => {
 
   return (
     <div className="ml-[270px] flex justify-between">
-      <div className="min-h-screen bg-black flex justify-start w-full">
+      <div className="min-h-screen mr-[100px]  bg-black flex justify-start w-full">
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-lg p-6 bg-gray-900 rounded-lg"
+          className="w-full  p-6 bg-gray-900 rounded-lg"
         >
           <h1 className="text-white text-2xl font-semibold mb-4">
             Create a Post
@@ -166,12 +170,13 @@ const NewPost = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              disabled={!isFormValid}
-              className={`bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 ${
-                !isFormValid ? "opacity-50 cursor-not-allowed" : ""
+              disabled={!isFormValid || isLoading}
+              className={`bg-purple-600 text-white px-4 py-2 rounded-md flex justify-center items-center hover:bg-purple-700 ${
+                !isFormValid || isLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              Share Post
+              {isLoading ? <FaSpinner className="animate-spin mr-2" /> : <></>}
+              {isLoading ? "Loading..." : "Share Post"}
             </button>
           </div>
         </form>

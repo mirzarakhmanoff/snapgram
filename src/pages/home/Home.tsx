@@ -3,18 +3,42 @@ import Creators from "../../components/creators/Creators";
 import Stories from "../../components/stories/Stories";
 import { useGetUserQuery } from "../../redux/api/register-api";
 import HomeFeed from "../../components/HomeFeed/HomeFeed";
+import { useEffect } from "react";
 
 const Home = () => {
   const { data: creators, isLoading, error } = useGetUserQuery({ limit: 100 });
   const navigate = useNavigate();
 
-  if (error) navigate("/login");
+  useEffect(() => {
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === "token") {
+        navigate("/login");
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    const token = localStorage.getItem("token");
+    const originalToken = localStorage.getItem("token");
+    if (token && token !== originalToken) {
+      navigate("/login");
+    }
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [navigate]);
+
+  if (error) {
+    navigate("/login");
+    return null;
+  }
+
   if (isLoading) return <>loading...</>;
 
   return (
     <div className="flex bg-black">
       <div className="flex-1 ml-[270px] mr-[465px] pt-6">
-        {" "}
         <Stories />
         <HomeFeed />
       </div>
