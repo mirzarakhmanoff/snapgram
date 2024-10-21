@@ -3,7 +3,6 @@ import { useGetUserQuery } from "../../redux/api/register-api";
 
 const People = () => {
   const { data: creators, isLoading, error } = useGetUserQuery({ limit: 100 });
-  console.log(creators);
 
   return (
     <div className="p-6 ml-[300px]  w-full ">

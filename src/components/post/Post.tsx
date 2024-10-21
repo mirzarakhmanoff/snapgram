@@ -75,7 +75,7 @@ function Post({ data }: any) {
             <Link to={`/profile/${post?.owner?.username}`}>
               <div>
                 <span className="user-name font-semibold text-white">
-                  {post.caption}
+                  {post?.owner.username}
                 </span>
                 <span className="date text-gray-400 text-sm block">
                   {new Date(post.createdAt).toLocaleString()}
@@ -94,7 +94,6 @@ function Post({ data }: any) {
                   pagination={pagination}
                   spaceBetween={50}
                   slidesPerView={1}
-                  onSlideChange={() => console.log("slide change")}
                 >
                   {post.content?.map((content, index) => (
                     <SwiperSlide key={index}>

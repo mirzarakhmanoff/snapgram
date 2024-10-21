@@ -9,7 +9,6 @@ const HomeFeed = () => {
   const { data, error, isLoading, refetch, isFetching } = useGetPostsQuery({
     limit,
   });
-  console.log(data);
 
   const loaderRef = useRef<HTMLDivElement | null>(null);
 

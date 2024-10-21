@@ -1,19 +1,31 @@
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import { useGetuserProfileQuery } from "../../redux/api/register-api";
+import {
+  useFollowMutation,
+  useGetuserProfileQuery,
+  useUnfollowMutation,
+} from "../../redux/api/register-api";
 import Posts from "../../components/posts/Posts";
 
 const Profile: React.FC = () => {
   const { id: userId } = useParams<{ id: string }>();
-  console.log(userId);
 
   const { data, isLoading, error } = useGetuserProfileQuery(userId);
+  const currentUser = JSON.parse(localStorage.getItem("user") as string);
+  const [follow] = useFollowMutation();
+  const [unfollow] = useUnfollowMutation();
 
   if (isLoading) return <p>Loading...</p>;
   if (error || !data) return <p>Error loading profile.</p>;
 
-  console.log(data);
+  const followUser = async (username: string) => {
+    await follow(username);
+  };
+
+  const unfollowUser = async (username: string) => {
+    await unfollow(username);
+  };
 
   return (
     <div className="bg-black text-white min-h-screen p-6 absolute left-[300px]">
@@ -28,12 +40,32 @@ const Profile: React.FC = () => {
           </div>
           <p className="text-gray-400">{`@ ${data?.username}`}</p>
         </div>
-        <div className="ml-auto space-x-4">
-          <button className="bg-blue-600 px-4 py-2 rounded-lg">Follow</button>
-          <button className="border border-gray-500 px-4 py-2 rounded-lg">
-            Message
-          </button>
-        </div>
+        {data._id === currentUser._id ? (
+          <></>
+        ) : (
+          <div className="ml-auto space-x-4">
+            {data.followers.some(
+              (follower: any) => follower._id === currentUser._id
+            ) ? (
+              <button
+                onClick={() => unfollowUser(data.username)}
+                className="mt-2 bg-red-600 text-white px-4 py-1 hover:bg-red-700 transition-all"
+              >
+                Unfollow
+              </button>
+            ) : (
+              <button
+                onClick={() => followUser(data.username)}
+                className="mt-2 bg-purple-600 text-white  px-4 py-1 hover:bg-purple-700 transition-all"
+              >
+                Follow
+              </button>
+            )}
+            <button className="border border-gray-500 px-4 py-2 rounded-lg">
+              Message
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="flex space-x-12 mt-6 text-gray-300">

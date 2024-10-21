@@ -62,9 +62,9 @@ const SideBar = () => {
             <h5 className="text-[10px] text-white font-semibold">
               {data?.fullName || "Unknown User"}
             </h5>
-            <a href="#" className="text-gray-400 text-sm">
+            <span className="text-gray-400 text-sm">
               {`@${data?.username || "username"}`}
-            </a>
+            </span>
           </div>
         </div>
       </Link>

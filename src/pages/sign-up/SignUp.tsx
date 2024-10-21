@@ -28,7 +28,6 @@ const SignUp: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postData(formData);
-    console.log("Sign-up data:", formData);
     navigate("/login");
   };
 
