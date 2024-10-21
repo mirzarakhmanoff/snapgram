@@ -30,7 +30,7 @@ const Profile: React.FC = () => {
   return (
     <div className="bg-black text-white min-h-screen p-6 absolute left-[300px]">
       <div className="flex items-center space-x-6">
-        <div className="w-20 h-20 rounded-full bg-white flex justify-center items-center">
+        <div className="w-20 h-20 rounded-full bg-white  overflow-hidden flex justify-center items-center">
           <img src={data?.photo} alt="" />
         </div>
         <div>
@@ -97,7 +97,7 @@ const Profile: React.FC = () => {
         <p>📧 Business Inquiries - Email or DM</p>
       </div>
 
-      <div className="flex justify-between mt-8 space-x-4">
+      <div className="flex gap-5  my-8 space-x-4">
         {[
           "JSM Pro",
           "React Course",

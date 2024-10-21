@@ -1,5 +1,8 @@
 import { useGetUserPostsQuery } from "../../redux/api/file-api";
 import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Pagination } from "swiper/modules";
 
 const Posts = ({ userId }: any) => {
   const { data: posts } = useGetUserPostsQuery({ userId });
@@ -13,18 +16,45 @@ const Posts = ({ userId }: any) => {
     setSelectedImage(null);
   };
 
+  const pagination = {
+    clickable: true,
+    renderBullet: function (_: any, className: string) {
+      return `<span class="${className} bg-white w-2 h-2 p-1 rounded-full inline-block"></span>`;
+    },
+  };
+
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-wrap gap-5">
       {posts?.map((post: any, idx: number) => (
         <div key={idx} className="w-[300px]">
-          <img
-            src={post?.content[0]?.url}
-            alt=""
-            className="cursor-pointer"
-            onClick={() =>
-              handleImageClick(post.content.map((idx: number) => idx).url)
-            }
-          />
+          <Swiper
+            modules={[Pagination]}
+            pagination={pagination}
+            spaceBetween={50}
+            slidesPerView={1}
+          >
+            {post?.content?.map((media: any, mediaIdx: number) => (
+              <SwiperSlide key={mediaIdx}>
+                <div>
+                  {media.type === "IMAGE" && (
+                    <img
+                      src={media.url}
+                      alt={`Post ${idx} content ${mediaIdx}`}
+                      className="cursor-pointer object-cover w-full h-64 rounded-lg border"
+                      onClick={() => handleImageClick(media.url)}
+                    />
+                  )}
+                  {media.type === "VIDEO" && (
+                    <video
+                      src={media.url}
+                      controls
+                      className="w-full h-auto cursor-pointer border"
+                    ></video>
+                  )}
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       ))}
 

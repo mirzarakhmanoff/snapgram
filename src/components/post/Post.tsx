@@ -1,9 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FaComment, FaShare, FaRegHeart } from "react-icons/fa";
-
+import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
 import avatar from "../../assets/avatarka.jpg";
-import { Pagination } from "swiper/modules";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -51,9 +51,6 @@ function Post({ data }: any) {
     }));
   };
 
-  // if (isLoading) return <p className="text-white">Loading...</p>;
-  // if (error) return <p className="text-red-500">Error loading posts.</p>;
-
   return (
     <div className="post-list bg-gray-900 p-4">
       {data?.posts?.map((post: PostType) => (
@@ -61,18 +58,17 @@ function Post({ data }: any) {
           key={post._id}
           className="twitter-post bg-gray-800 shadow-md rounded-lg p-4 mb-6"
         >
-          <div className="post-header flex items-center mb-2">
-            <img
-              src={
-                post.owner?.photo && post.owner.photo.includes("https")
-                  ? post.owner.photo
-                  : avatar
-              }
-              alt="avatar"
-              className="w-10 h-10 rounded-full mr-3"
-            />
-
-            <Link to={`/profile/${post?.owner?.username}`}>
+          <Link to={`/profile/${post?.owner?.username}`}>
+            <div className="post-header flex items-center mb-2">
+              <img
+                src={
+                  post.owner?.photo && post.owner.photo.includes("https")
+                    ? post.owner.photo
+                    : avatar
+                }
+                alt="avatar"
+                className="w-10 h-10 rounded-full mr-3"
+              />
               <div>
                 <span className="user-name font-semibold text-white">
                   {post?.owner.username}
@@ -81,32 +77,51 @@ function Post({ data }: any) {
                   {new Date(post.createdAt).toLocaleString()}
                 </span>
               </div>
-            </Link>
-          </div>
+            </div>
+          </Link>
 
           <div className="post-content mb-4">
             <p className="text-gray-300">{post.content_alt}</p>
 
             {post.content.length > 0 && (
-              <div className="image-container my-4 max-w-[600px] w-full  mx-auto">
+              <div className="image-container my-4 max-w-[600px] w-full mx-auto">
                 <Swiper
-                  modules={[Pagination]}
+                  modules={[Pagination, Navigation]}
                   pagination={pagination}
+                  navigation={{
+                    prevEl: `.swiper-button-prev-${post._id}`,
+                    nextEl: `.swiper-button-next-${post._id}`,
+                  }}
                   spaceBetween={50}
                   slidesPerView={1}
                 >
                   {post.content?.map((content, index) => (
                     <SwiperSlide key={index}>
                       <div key={index} className="relative w-full h-64 mb-2">
-                        <img
-                          src={content.url}
-                          alt={`Post content ${index + 1}`}
-                          className="w-full h-full rounded-lg cursor-pointer object-cover"
-                          onClick={() => handleImageClick(content.url)}
-                        />
+                        {content.type === "IMAGE" ? (
+                          <img
+                            src={content.url}
+                            alt={`Post content ${index + 1}`}
+                            className="w-full h-full rounded-lg cursor-pointer object-cover"
+                            onClick={() => handleImageClick(content.url)}
+                          />
+                        ) : (
+                          <video
+                            controls
+                            className="w-full h-full rounded-lg"
+                            src={content.url}
+                          ></video>
+                        )}
                       </div>
                     </SwiperSlide>
                   ))}
+
+                  <div
+                    className={`swiper-button-prev swiper-button-prev-${post._id} text-white`}
+                  />
+                  <div
+                    className={`swiper-button-next swiper-button-next-${post._id} text-white`}
+                  />
                 </Swiper>
               </div>
             )}
