@@ -45,7 +45,10 @@ const NewPost = () => {
 
       const uploadResponse = await uploadFiles(formData).unwrap();
       const fileUrls = uploadResponse.files.map(
-        (fileArr: any[]) => fileArr[0].url
+        (fileArr: any, index: number) => ({
+          url: fileArr?.[0].url,
+          type: files[index].type.split("/")[0].toUpperCase(),
+        })
       );
 
       await createPost({

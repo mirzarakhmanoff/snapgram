@@ -5,13 +5,19 @@ import "swiper/css";
 import avatar from "../../assets/avatarka.jpg";
 import { Pagination } from "swiper/modules";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface PostType {
   _id: string;
   caption: string;
   content_alt: string;
   createdAt: string;
-  content: string[];
+  content: [
+    {
+      url: string;
+      type: "AUDIO" | "VIDEO" | "IMAGE";
+    }
+  ];
   likes_count: number;
   comments_count: number;
   shares_count: number;
@@ -66,14 +72,16 @@ function Post({ data }: any) {
               className="w-10 h-10 rounded-full mr-3"
             />
 
-            <div>
-              <span className="user-name font-semibold text-white">
-                {post.caption}
-              </span>
-              <span className="date text-gray-400 text-sm block">
-                {new Date(post.createdAt).toLocaleString()}
-              </span>
-            </div>
+            <Link to={`/profile/${post?.owner?.username}`}>
+              <div>
+                <span className="user-name font-semibold text-white">
+                  {post.caption}
+                </span>
+                <span className="date text-gray-400 text-sm block">
+                  {new Date(post.createdAt).toLocaleString()}
+                </span>
+              </div>
+            </Link>
           </div>
 
           <div className="post-content mb-4">
@@ -88,14 +96,14 @@ function Post({ data }: any) {
                   slidesPerView={1}
                   onSlideChange={() => console.log("slide change")}
                 >
-                  {post.content.map((imageUrl, index) => (
+                  {post.content?.map((content, index) => (
                     <SwiperSlide key={index}>
                       <div key={index} className="relative w-full h-64 mb-2">
                         <img
-                          src={imageUrl}
+                          src={content.url}
                           alt={`Post content ${index + 1}`}
                           className="w-full h-full rounded-lg cursor-pointer object-cover"
-                          onClick={() => handleImageClick(imageUrl)}
+                          onClick={() => handleImageClick(content.url)}
                         />
                       </div>
                     </SwiperSlide>

@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/Union.svg";
-import profile from "../../assets/profile.png";
+import profileimg from "../../assets/avatarka.jpg";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -51,17 +51,23 @@ const SideBar = () => {
           <p className="text-xl font-semibold">Snapgram</p>
         </Link>
       </div>
-      <div className="flex items-center mb-3 gap-3">
-        <img src={profile} alt="Profile" className="w-12 h-12 rounded-full" />
-        <div className="text-center">
-          <h5 className="text-[10px] text-white font-semibold">
-            {data?.fullName || "Unknown User"}
-          </h5>
-          <a href="#" className="text-gray-400 text-sm">
-            {`@${data?.username || "username"}`}
-          </a>
+      <Link to={`/profile/${data?.username}`}>
+        <div className="flex items-center mb-3 gap-3">
+          <img
+            src={data?.photo?.includes("https") ? data?.photo : profileimg}
+            alt="Profile"
+            className="w-12 h-12 rounded-full"
+          />
+          <div className="text-center">
+            <h5 className="text-[10px] text-white font-semibold">
+              {data?.fullName || "Unknown User"}
+            </h5>
+            <a href="#" className="text-gray-400 text-sm">
+              {`@${data?.username || "username"}`}
+            </a>
+          </div>
         </div>
-      </div>
+      </Link>
       <div className="flex flex-col gap-6">
         <ul className="mb-4">
           {[

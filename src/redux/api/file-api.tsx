@@ -27,6 +27,14 @@ export const productApi = api.injectEndpoints({
       },
       providesTags: [],
     }),
+    getUserPosts: build.query({
+      query: (params) => {
+        return {
+          url: `/api/post/${params?.userId}`,
+        };
+      },
+      providesTags: [],
+    }),
   }),
 });
 
@@ -34,4 +42,5 @@ export const {
   useUploadFIleMutation,
   useCreatePostMutation,
   useGetPostsQuery,
+  useGetUserPostsQuery,
 } = productApi;

@@ -5,6 +5,8 @@ import {
 } from "../../redux/api/register-api";
 import { FC } from "react";
 
+import profileimg from "../../assets/avatarka.jpg";
+
 interface CreatorsProps {
   creators: any[];
   error: any;
@@ -61,8 +63,7 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
               <div className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center w-[180px]">
                 <img
                   src={
-                    user.photo ||
-                    "//i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
+                    user?.photo?.includes("https") ? user?.photo : profileimg
                   }
                   alt={user.name}
                   className="w-24 h-24 rounded-full mb-2"

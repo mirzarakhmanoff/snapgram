@@ -9,12 +9,14 @@ const HomeFeed = () => {
   const { data, error, isLoading, refetch, isFetching } = useGetPostsQuery({
     limit,
   });
+  console.log(data);
+
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isFetching) {
+        if (entry.isIntersecting && !isFetching && data.total > limit) {
           setLimit((prev) => prev + 10);
         }
       },

@@ -2,9 +2,11 @@ import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useGetuserProfileQuery } from "../../redux/api/register-api";
+import Posts from "../../components/posts/Posts";
 
 const Profile: React.FC = () => {
   const { id: userId } = useParams<{ id: string }>();
+  console.log(userId);
 
   const { data, isLoading, error } = useGetuserProfileQuery(userId);
 
@@ -80,6 +82,7 @@ const Profile: React.FC = () => {
           </div>
         ))}
       </div>
+      <Posts data={data} userId={userId} />
     </div>
   );
 };
