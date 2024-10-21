@@ -43,7 +43,7 @@ const Home = () => {
         <HomeFeed />
       </div>
 
-      <div className="w-[465px] h-screen fixed overflow-scroll right-0 top-0">
+      <div className="hidden lg:block w-[465px]  h-screen fixed overflow-scroll right-0 top-0">
         <Creators
           creators={creators}
           error={error}

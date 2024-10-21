@@ -36,19 +36,20 @@ const SideBar = () => {
     window.location.reload();
     handleClose();
   };
+
   const { data } = useGetProfileQuery({});
 
   if (data) {
     localStorage.setItem("user", JSON.stringify(data));
-  } else {
-    <></>;
   }
+
   return (
-    <div className="bg-black   p-6 w-[270px] fixed top-0 left-0 h-screen">
+    <div className="bg-black p-4 w-[270px] fixed top-0 left-0 h-screen">
+      {" "}
       <div className="mb-5">
         <Link to="/" className="flex gap-2 items-center text-white">
           <img src={logo} alt="Logo" className="w-8 h-8" />
-          <p className="text-xl font-semibold">Snapgram</p>
+          <p className="text-xl font-semibold hidden md:block">Snapgram</p>{" "}
         </Link>
       </div>
       <Link to={`/profile/${data?.username}`}>
@@ -59,10 +60,12 @@ const SideBar = () => {
             className="w-12 h-12 rounded-full"
           />
           <div className="text-center">
-            <h5 className="text-[10px] text-white font-semibold">
+            <h5 className="text-[10px] text-white font-semibold hidden md:block">
+              {" "}
               {data?.fullName || "Unknown User"}
             </h5>
-            <span className="text-gray-400 text-sm">
+            <span className="text-gray-400 text-sm hidden md:block">
+              {" "}
               {`@${data?.username || "username"}`}
             </span>
           </div>
@@ -79,16 +82,19 @@ const SideBar = () => {
             { icon: icon5, label: "Chats", to: "/chats" },
             { icon: icon6, label: "Create Post", to: "/new-post" },
           ].map(({ icon, label, to }, index) => (
-            <li
-              key={index}
-              className="mb-3 p-3 border border-transparent rounded-[8px] hover:bg-[#877EFF] hover:border-white"
-            >
+            <li key={index} className="mb-3">
               <NavLink
                 to={to}
-                className="flex items-center gap-3 text-white transition-colors"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 p-3 rounded-[8px] transition-colors ${
+                    isActive
+                      ? "bg-[#877EFF] text-white"
+                      : "text-white hover:bg-[#877EFF] hover:text-white"
+                  }`
+                }
               >
                 <img src={icon} alt={label} className="w-6 h-6" />
-                <span>{label}</span>
+                <span className="hidden md:block">{label}</span>{" "}
               </NavLink>
             </li>
           ))}
@@ -100,7 +106,7 @@ const SideBar = () => {
           >
             <button className="flex items-center gap-3 text-white transition-colors">
               <img src={icon7} alt="Logout" className="w-6 h-6" />
-              <span>Logout</span>
+              <span className="hidden md:block">Logout</span>{" "}
             </button>
           </li>
           <li className="p-3 border border-transparent rounded-[8px] hover:bg-[#877EFF] hover:border-white">
@@ -113,7 +119,7 @@ const SideBar = () => {
                 alt="Settings"
                 className="w-6 h-6 group-hover:brightness-0 group-hover:invert"
               />
-              <span>Settings</span>
+              <span className="hidden md:block">Settings</span>{" "}
             </NavLink>
           </li>
         </ul>
