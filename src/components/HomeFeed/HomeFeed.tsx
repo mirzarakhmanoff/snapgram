@@ -42,7 +42,10 @@ const HomeFeed = () => {
     }
   }, [limit, refetch]);
 
-  if (isLoading) return <p className="text-white">Loading...</p>;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center mx-auto my-auto mt-[200px]"></div>
+    );
   if (error) return <p className="text-red-500">Error loading posts.</p>;
 
   return (

@@ -6,6 +6,7 @@ import {
 } from "../../redux/api/file-api";
 import { useNavigate } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
+import { AiOutlineClose } from "react-icons/ai";
 
 const NewPost = () => {
   const [caption, setCaption] = useState<string>("");
@@ -29,6 +30,10 @@ const NewPost = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+  };
+
+  const handleRemoveFile = (index: number) => {
+    setFiles(files.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -75,10 +80,10 @@ const NewPost = () => {
 
   return (
     <div className="ml-[270px] flex justify-between">
-      <div className="min-h-screen mr-[100px]  bg-black flex justify-start w-full">
+      <div className="min-h-screen mr-[100px] bg-black flex justify-start w-full">
         <form
           onSubmit={handleSubmit}
-          className="w-full  p-6 bg-gray-900 rounded-lg"
+          className="w-full p-6 bg-gray-900 rounded-lg"
         >
           <h1 className="text-white text-2xl font-semibold mb-4">
             Create a Post
@@ -102,13 +107,22 @@ const NewPost = () => {
               {files.length > 0 ? (
                 <div className="flex gap-3 flex-col">
                   <div className="flex gap-3 items-center justify-center">
-                    {files.map((file) => (
-                      <img
-                        className="w-[100px] h-[100px] object-cover"
-                        key={file.name}
-                        src={URL.createObjectURL(file)}
-                        alt=""
-                      />
+                    {files.map((file, index) => (
+                      <div key={file.name} className="relative">
+                        <img
+                          className="w-[100px] h-[100px] object-cover"
+                          src={URL.createObjectURL(file)}
+                          alt=""
+                        />
+                        {/* Кнопка удаления файла */}
+                        <button
+                          type="button"
+                          className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                          onClick={() => handleRemoveFile(index)}
+                        >
+                          <AiOutlineClose size={16} />
+                        </button>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -118,6 +132,7 @@ const NewPost = () => {
                   <p className="text-sm">
                     SVG, PNG, JPG or GIF (max. 800x400px)
                   </p>
+                  {/* Измененная кнопка, которая теперь только открывает выбор файлов */}
                   <button
                     type="button"
                     onClick={handleSelectImage}
@@ -127,23 +142,16 @@ const NewPost = () => {
                   </button>
                 </div>
               )}
+              {/* Скрытый input, который открывается только при клике на кнопку */}
               <input
                 ref={fileInputRef}
                 type="file"
                 accept="image/*,video/*"
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                className="hidden"
                 onChange={handleFileChange}
                 multiple
               />
             </div>
-
-            {/* <button
-              onClick={handleUpload}
-              type="button"
-              className="mt-4 bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700"
-            >
-              Upload
-            </button> */}
           </div>
 
           <div className="mb-4">
@@ -178,7 +186,7 @@ const NewPost = () => {
                 !isFormValid || isLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              {isLoading ? <FaSpinner className="animate-spin mr-2" /> : <></>}
+              {isLoading ? <FaSpinner className="animate-spin mr-2" /> : null}
               {isLoading ? "Loading..." : "Share Post"}
             </button>
           </div>

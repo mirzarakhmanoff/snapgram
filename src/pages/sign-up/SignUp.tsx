@@ -63,7 +63,7 @@ const SignUp: React.FC = () => {
           }}
         >
           <TextField
-            label="Full Name"
+            placeholder="Full Name" // Используем placeholder вместо label
             variant="outlined"
             name="full_name"
             value={formData.full_name}
@@ -74,7 +74,7 @@ const SignUp: React.FC = () => {
             sx={{ backgroundColor: "white", borderRadius: 1 }}
           />
           <TextField
-            label="Username"
+            placeholder="Username" // Используем placeholder вместо label
             variant="outlined"
             name="username"
             value={formData.username}
@@ -85,7 +85,7 @@ const SignUp: React.FC = () => {
             sx={{ backgroundColor: "white", borderRadius: 1 }}
           />
           <TextField
-            label="Email"
+            placeholder="Email" // Используем placeholder вместо label
             variant="outlined"
             name="email"
             value={formData.email}
@@ -96,7 +96,7 @@ const SignUp: React.FC = () => {
             sx={{ backgroundColor: "white", borderRadius: 1 }}
           />
           <TextField
-            label="Password"
+            placeholder="Password" // Используем placeholder вместо label
             variant="outlined"
             type="password"
             name="password"

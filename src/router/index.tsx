@@ -1,15 +1,12 @@
-import { lazy, LazyExoticComponent } from "react";
+import { lazy, LazyExoticComponent, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
-import { SuspenseComponent as Suspense } from "../utils";
-import Login from "../pages/login/Login";
-import SignUp from "../pages/sign-up/SignUp";
 import Auth from "../components/auth/Auth";
 import NewPost from "../pages/newPost/NewPost";
 import People from "../pages/people/People";
 import Profile from "../pages/profile/Profile";
-
+import SignUp from "../pages/sign-up/SignUp";
+import Login from "../pages/login/Login";
 const Home: LazyExoticComponent<any> = lazy(() => import("../pages/home/Home"));
-
 const Layout: LazyExoticComponent<any> = lazy(
   () => import("../pages/layout/Layout")
 );

@@ -16,7 +16,11 @@ const Profile: React.FC = () => {
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center mx-auto my-auto mt-[200px]"></div>
+    );
+  }
   if (error || !data) return <p>Error loading profile.</p>;
 
   const followUser = async (username: string) => {
