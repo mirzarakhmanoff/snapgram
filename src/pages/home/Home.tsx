@@ -47,7 +47,6 @@ const Home = () => {
           error={error}
           isLoading={isLoading}
           title={"New Users"}
-          length={creators?.length}
         />
       </div>
     </div>

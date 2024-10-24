@@ -12,16 +12,9 @@ interface CreatorsProps {
   error: any;
   isLoading: boolean;
   title: string;
-  length: any;
 }
 
-const Creators: FC<CreatorsProps> = ({
-  creators,
-  error,
-  isLoading,
-  title,
-  length,
-}) => {
+const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
 
