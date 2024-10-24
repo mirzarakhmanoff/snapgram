@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { TextField, Button, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  IconButton,
+  InputAdornment,
+  Alert,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import logo from "../../assets/Union.svg";
 import { FcGoogle } from "react-icons/fc";
 import heroImg from "../../assets/Frame 41.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../redux/api/register-api";
 import { FormLogin } from "../../types";
-
 import Snackbar from "@mui/material/Snackbar";
 
 const Login: React.FC = () => {
@@ -15,8 +22,10 @@ const Login: React.FC = () => {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -25,7 +34,9 @@ const Login: React.FC = () => {
     });
   };
 
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const handleClickShowPassword = () => {
+    setShowPassword((prevShow) => !prevShow);
+  };
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
@@ -80,7 +91,6 @@ const Login: React.FC = () => {
             }}
           >
             <TextField
-              label="Username"
               variant="outlined"
               name="username"
               value={formData.username}
@@ -88,19 +98,35 @@ const Login: React.FC = () => {
               fullWidth
               margin="normal"
               required
-              sx={{ backgroundColor: "white", borderRadius: 1 }}
+              placeholder="Username"
+              sx={{
+                backgroundColor: "#fff",
+                borderRadius: 1,
+              }}
             />
             <TextField
-              label="Password"
               variant="outlined"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password}
               onChange={handleChange}
               fullWidth
               margin="normal"
               required
-              sx={{ backgroundColor: "white", borderRadius: 1 }}
+              placeholder="Password"
+              sx={{
+                backgroundColor: "#fff",
+                borderRadius: 1,
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleClickShowPassword} edge="end">
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <Button
               type="submit"
@@ -149,9 +175,21 @@ const Login: React.FC = () => {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={snackbarOpen}
         onClose={handleSnackbarClose}
-        message="Login failed, please try again."
         autoHideDuration={3000}
-      />
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="error"
+          sx={{
+            backgroundColor: "#FF3D00",
+            color: "#FFFFFF",
+            boxShadow: 3,
+            fontWeight: "bold",
+          }}
+        >
+          Login failed, please try again.
+        </Alert>
+      </Snackbar>
     </>
   );
 };

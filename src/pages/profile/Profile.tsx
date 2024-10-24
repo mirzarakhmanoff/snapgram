@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaEdit } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import {
   useFollowMutation,
@@ -45,7 +45,10 @@ const Profile: React.FC = () => {
           <p className="text-gray-400">{`@ ${data?.username}`}</p>
         </div>
         {data._id === currentUser._id ? (
-          <></>
+          <button className="flex items-center  text-white rounded-lg px-4 py-2 transition duration-200 hover:text-[#FFA700] hover:shadow-lg">
+            <FaEdit className="mr-2 text-[#ffa700]" />
+            Edit Profile
+          </button>
         ) : (
           <div className="ml-auto space-x-4">
             {data.followers.some(

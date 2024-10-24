@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { TextField, Button, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  IconButton,
+  InputAdornment,
+  FormHelperText,
+  Snackbar,
+  Alert,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import logo from "../../assets/Union.svg";
 import { FcGoogle } from "react-icons/fc";
 import heroImg from "../../assets/Frame 41.png";
@@ -15,6 +25,10 @@ const SignUp: React.FC = () => {
     password: "",
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -25,10 +39,23 @@ const SignUp: React.FC = () => {
   const navigate = useNavigate();
   const [postData] = usePostDataMutation();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postData(formData);
-    navigate("/login");
+    try {
+      await postData(formData).unwrap();
+      navigate("/login");
+    } catch (err) {
+      setError("Failed to sign up. Please check your credentials.");
+      setSnackbarOpen(true);
+    }
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
   };
 
   return (
@@ -63,7 +90,7 @@ const SignUp: React.FC = () => {
           }}
         >
           <TextField
-            placeholder="Full Name" // Используем placeholder вместо label
+            placeholder="Full Name"
             variant="outlined"
             name="full_name"
             value={formData.full_name}
@@ -72,9 +99,10 @@ const SignUp: React.FC = () => {
             margin="normal"
             required
             sx={{ backgroundColor: "white", borderRadius: 1 }}
+            error={!!error}
           />
           <TextField
-            placeholder="Username" // Используем placeholder вместо label
+            placeholder="Username"
             variant="outlined"
             name="username"
             value={formData.username}
@@ -83,9 +111,10 @@ const SignUp: React.FC = () => {
             margin="normal"
             required
             sx={{ backgroundColor: "white", borderRadius: 1 }}
+            error={!!error}
           />
           <TextField
-            placeholder="Email" // Используем placeholder вместо label
+            placeholder="Email"
             variant="outlined"
             name="email"
             value={formData.email}
@@ -94,19 +123,31 @@ const SignUp: React.FC = () => {
             margin="normal"
             required
             sx={{ backgroundColor: "white", borderRadius: 1 }}
+            error={!!error}
           />
           <TextField
-            placeholder="Password" // Используем placeholder вместо label
+            placeholder="Password"
             variant="outlined"
-            type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
+            type={showPassword ? "text" : "password"}
             fullWidth
             margin="normal"
             required
             sx={{ backgroundColor: "white", borderRadius: 1 }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleClickShowPassword}>
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            error={!!error}
           />
+          {error && <FormHelperText error>{error}</FormHelperText>}{" "}
           <Button
             type="submit"
             variant="contained"
@@ -122,12 +163,10 @@ const SignUp: React.FC = () => {
           >
             Sign Up
           </Button>
-
           <button className="flex items-center justify-center w-full max-w-xs mx-auto mt-6 bg-white text-gray-700 border border-gray-300 rounded-md shadow-sm py-2 px-4 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             <FcGoogle className="mr-2 text-xl" />
             Sign in with Google
           </button>
-
           <div className="text-center text-white mt-6">
             <p className="text-sm">
               Already have an account?{" "}
@@ -146,6 +185,26 @@ const SignUp: React.FC = () => {
           className="object-cover w-full h-full rounded-lg"
         />
       </div>
+
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        autoHideDuration={3000}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="error"
+          sx={{
+            backgroundColor: "#FF3D00",
+            color: "#FFFFFF",
+            boxShadow: 3,
+            fontWeight: "bold",
+          }}
+        >
+          {error}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

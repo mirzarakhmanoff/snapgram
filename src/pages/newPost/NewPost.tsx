@@ -79,8 +79,8 @@ const NewPost = () => {
     caption.trim() && location.trim() && altText.trim() && files.length > 0;
 
   return (
-    <div className="ml-[270px] flex justify-between">
-      <div className="min-h-screen mr-[100px] bg-black flex justify-start w-full">
+    <div className="ml-[270px] flex justify-between overflow-hidden">
+      <div className="min-h-screen    mr-[100px] bg-black flex justify-start w-full">
         <form
           onSubmit={handleSubmit}
           className="w-full p-6 bg-gray-900 rounded-lg"
@@ -114,7 +114,6 @@ const NewPost = () => {
                           src={URL.createObjectURL(file)}
                           alt=""
                         />
-                        {/* Кнопка удаления файла */}
                         <button
                           type="button"
                           className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
@@ -132,7 +131,6 @@ const NewPost = () => {
                   <p className="text-sm">
                     SVG, PNG, JPG or GIF (max. 800x400px)
                   </p>
-                  {/* Измененная кнопка, которая теперь только открывает выбор файлов */}
                   <button
                     type="button"
                     onClick={handleSelectImage}
@@ -142,7 +140,6 @@ const NewPost = () => {
                   </button>
                 </div>
               )}
-              {/* Скрытый input, который открывается только при клике на кнопку */}
               <input
                 ref={fileInputRef}
                 type="file"

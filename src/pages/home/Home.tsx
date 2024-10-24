@@ -6,7 +6,7 @@ import HomeFeed from "../../components/HomeFeed/HomeFeed";
 import { useEffect } from "react";
 
 const Home = () => {
-  const { data: creators, isLoading, error } = useGetUserQuery({ limit: 6 });
+  const { data: creators, isLoading, error } = useGetUserQuery({ limit: 10 });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,8 +34,6 @@ const Home = () => {
     return null;
   }
 
-  if (isLoading) return <>loading...</>;
-
   return (
     <div className="flex bg-black">
       <div className="flex-1 ml-[270px] mr-[465px] pt-6">
@@ -49,6 +47,7 @@ const Home = () => {
           error={error}
           isLoading={isLoading}
           title={"New Users"}
+          length={creators?.length}
         />
       </div>
     </div>

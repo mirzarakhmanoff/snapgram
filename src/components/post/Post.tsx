@@ -1,3 +1,4 @@
+// Post.tsx
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FaComment, FaShare, FaRegHeart } from "react-icons/fa";
 import { Navigation, Pagination } from "swiper/modules";
@@ -6,6 +7,7 @@ import "swiper/css/navigation";
 import avatar from "../../assets/avatarka.jpg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import PostSkeleton from "./PostSkeleton";
 
 interface PostType {
   _id: string;
@@ -25,7 +27,7 @@ interface PostType {
   photo: string;
 }
 
-function Post({ data }: any) {
+function Post({ data, loading }: { data: any; loading: boolean }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [comments, setComments] = useState<{ [postId: string]: string }>({});
 
@@ -50,6 +52,16 @@ function Post({ data }: any) {
       [postId]: value,
     }));
   };
+
+  if (loading) {
+    return (
+      <div className="post-list bg-gray-900 p-4">
+        {[...Array(3)].map((_, index) => (
+          <PostSkeleton key={index} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="post-list bg-gray-900 p-4">
@@ -97,7 +109,7 @@ function Post({ data }: any) {
                 >
                   {post.content?.map((content, index) => (
                     <SwiperSlide key={index}>
-                      <div key={index} className="relative w-full h-64 mb-2">
+                      <div className="relative w-full h-64 mb-2">
                         {content.type === "IMAGE" ? (
                           <img
                             src={content.url}
@@ -144,7 +156,7 @@ function Post({ data }: any) {
 
           <div className="comment-section">
             <textarea
-              placeholder="Write your comment..."
+              placeholder="Напишите ваш комментарий..."
               className="w-full border border-gray-700 bg-gray-800 text-gray-300 rounded-lg p-2 mb-2"
               value={comments[post._id] || ""}
               onChange={(e) => handleCommentChange(post._id, e.target.value)}
@@ -155,7 +167,7 @@ function Post({ data }: any) {
               }`}
               disabled={!comments[post._id]}
             >
-              Send
+              Отправить
             </button>
           </div>
         </div>
@@ -171,7 +183,7 @@ function Post({ data }: any) {
               <div className="zoomed-image-container">
                 <img
                   src={selectedImage}
-                  alt="Zoomed"
+                  alt="Увеличенное"
                   className="max-w-full max-h-full object-contain"
                 />
               </div>

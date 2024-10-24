@@ -5,8 +5,8 @@ const People = () => {
   const { data: creators, isLoading, error } = useGetUserQuery({ limit: 100 });
 
   return (
-    <div className="p-6 ml-[300px]  w-full ">
-      <div className="flex  w-full m-0 p-0">
+    <div className="p-6 ml-[300px]  ">
+      <div className="flex items-center justify-center  gap-20  ">
         <Creators
           creators={creators}
           error={error}
