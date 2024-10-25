@@ -6,6 +6,7 @@ import People from "../pages/people/People";
 import Profile from "../pages/profile/Profile";
 import SignUp from "../pages/sign-up/SignUp";
 import Login from "../pages/login/Login";
+import Error from "../pages/error/Error";
 const Home: LazyExoticComponent<any> = lazy(() => import("../pages/home/Home"));
 const Layout: LazyExoticComponent<any> = lazy(
   () => import("../pages/layout/Layout")
@@ -55,15 +56,15 @@ const Routers = () => {
             </Suspense>
           ),
         },
+        {
+          path: "*",
+          element: (
+            <Suspense>
+              <Error />
+            </Suspense>
+          ),
+        },
       ],
-    },
-    {
-      path: "*",
-      element: (
-        <Suspense>
-          <h2>404</h2>
-        </Suspense>
-      ),
     },
     {
       path: "/login",

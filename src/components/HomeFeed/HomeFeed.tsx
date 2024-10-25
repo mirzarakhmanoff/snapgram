@@ -9,7 +9,6 @@ const HomeFeed = () => {
   const { data, error, isLoading, refetch, isFetching } = useGetPostsQuery({
     limit,
   });
-  console.log(data?.posts?.length);
 
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
@@ -73,7 +72,7 @@ const HomeFeed = () => {
           </span>
         </p>
       ) : (
-        <Post data={data} loading={isLoading} />
+        <Post data={data} loading={isLoading} refetch={refetch} />
       )}
 
       <div ref={loaderRef} className="w-full h-[50px] bg-black" />
