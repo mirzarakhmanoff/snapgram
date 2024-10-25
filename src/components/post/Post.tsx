@@ -2,7 +2,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { useState } from "react";
 import PostSkeleton from "./PostSkeleton";
-import PostItem from "./PostItem/Postitem";
+import PostItem from "../PostItem/Postitem";
 
 interface PostType {
   _id: string;

@@ -17,7 +17,24 @@ export const productApi = api.injectEndpoints({
       }),
       invalidatesTags: [],
     }),
+    getSinglePost: build.query({
+      query: ({ username, id }) => ({
+        url: `api/post/${username}/${id}`,
+        method: "GET",
+      }),
+    }),
+    getPostComments: build.query({
+      query: ({ id }) => ({
+        url: `api/comment/post/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useToggleLikeMutation, usePostCommentMutation } = productApi;
+export const {
+  useToggleLikeMutation,
+  usePostCommentMutation,
+  useGetSinglePostQuery,
+  useGetPostCommentsQuery,
+} = productApi;
