@@ -140,7 +140,7 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
         </div>
       </div>
 
-      <CommentInput id={String(post._id)} refetch={""} />
+      <CommentInput id={String(post._id)} />
     </div>
   );
 };

@@ -91,15 +91,15 @@ const SinglePostPage = () => {
                   )}
 
                   <div className="ml-4">
-                    <h3 className="font-semibold">{comment.user.fullName}</h3>
-                    <p>{comment.message}</p>
+                    <h3 className="font-semibold">{comment?.user?.fullName}</h3>
+                    <p>{comment?.message}</p>
                     <span className="text-gray-500 text-sm">
-                      {comment.createdAt}
+                      {comment?.createdAt}
                     </span>
                   </div>
                   <div className="ml-auto text-gray-500 flex items-center space-x-2">
                     <FaHeart />
-                    <span>{comment.likes}</span>
+                    <span>{comment?.likes}</span>
                   </div>
                 </div>
               ))
@@ -109,11 +109,11 @@ const SinglePostPage = () => {
           <div className="flex items-center mt-6 space-x-6">
             <div className="flex items-center space-x-2">
               <FaHeart />
-              <span>{data?.likes.length}</span>
+              <span>{data?.likes?.length}</span>
             </div>
             <div className="flex items-center space-x-2">
               <FaComment />
-              <span>{data?.comments.length}</span>
+              <span>{data?.comments?.length}</span>
             </div>
             <div className="flex items-center space-x-2">
               <FaShare />

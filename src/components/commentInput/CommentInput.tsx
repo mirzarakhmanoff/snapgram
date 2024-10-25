@@ -4,7 +4,7 @@ import profileimg from "../../assets/avatarka.jpg";
 
 interface CommentInputProps {
   id: string;
-  refetch: any;
+  refetch?: () => void;
 }
 
 const CommentInput: React.FC<CommentInputProps> = ({ id, refetch }) => {
@@ -17,14 +17,14 @@ const CommentInput: React.FC<CommentInputProps> = ({ id, refetch }) => {
   };
 
   const postComments = () => {
-    postComment({ id, body: { message } })
-      .then(() => {
+    postComment({ id, body: { message } }).then(() => {
+      if (typeof refetch === "function") {
         refetch();
-        setMessage("");
-      })
-      .catch((error) => {
-        console.error("Ошибка при отправке комментария:", error);
-      });
+      } else {
+        console.error("refetch is not a function:", refetch);
+      }
+      setMessage("");
+    });
   };
 
   return (
