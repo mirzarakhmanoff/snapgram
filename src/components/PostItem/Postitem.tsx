@@ -114,26 +114,28 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
         </div>
       </Link>
 
-      <div className="post-actions flex justify-between gap-3 text-gray-400 mb-4 text-xs sm:text-sm">
+      <div className="post-actions flex gap-3 text-gray-400 mb-4 text-xs sm:text-sm">
         <div className="flex items-center">
           <button onClick={() => toggleLike(post._id)}>
             {!isLiked ? (
               <FaRegHeart className="mr-1 " />
             ) : (
-              <FaHeart className="mr-1 " />
+              <FaHeart className="mr-1 text-red-700 text-xl" />
             )}
           </button>
           <span>{post.likes.length}</span>
         </div>
         <div className="flex items-center">
-          <button>
-            <FaComment className="mr-1" />
-          </button>
+          <Link to={`/post/${post?.owner?.username}/${post._id}`}>
+            <button>
+              <FaComment className="mr-1 text-xl" />
+            </button>
+          </Link>
           <span>{post.comments.length}</span>
         </div>
         <div className="flex items-center">
           <button>
-            <FaShare className="mr-1" />
+            <FaShare className="mr-1 text-xl" />
           </button>
           <span>{post.shares_count}</span>
         </div>

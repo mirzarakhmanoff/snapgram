@@ -37,8 +37,8 @@ const SinglePostPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-black ml-[300px]">
-      <div className="flex bg-[#1d1d1d] text-white  p-6 w-[1200px] flex-wrap">
+    <div className="flex min-h-screen bg-black ml-[300px] ">
+      <div className="flex bg-[#1d1d1d] text-white  p-6 w-[1200px] flex-wrap gap-5">
         <div onClick={handleGoBack} className="cursor-pointer block h-max  ">
           <FaChevronCircleLeft className="text-5xl" />
         </div>

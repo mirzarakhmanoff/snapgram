@@ -1,5 +1,4 @@
 import { useGetUserPostsQuery } from "../../redux/api/file-api";
-import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
@@ -7,15 +6,6 @@ import { Link } from "react-router-dom";
 
 const Posts = ({ userId, data: user }: any) => {
   const { data: posts, isLoading } = useGetUserPostsQuery({ userId });
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const handleImageClick = (imageUrl: string) => {
-    setSelectedImage(imageUrl);
-  };
-
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
 
   const pagination = {
     clickable: true,
@@ -26,7 +16,7 @@ const Posts = ({ userId, data: user }: any) => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-wrap gap-5 animate-pulse">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 animate-pulse">
         {[...Array(3)].map((_, idx) => (
           <div
             key={idx}
@@ -38,10 +28,10 @@ const Posts = ({ userId, data: user }: any) => {
   }
 
   return (
-    <div className="flex flex-wrap gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
       {posts?.map((post: any, idx: number) => (
-        <Link to={`/post/${user.username}/${post._id}`}>
-          <div key={idx} className="w-[300px]">
+        <Link to={`/post/${user.username}/${post._id}`} key={idx}>
+          <div className="w-[300px] h-[300px]">
             <Swiper
               modules={[Pagination]}
               pagination={pagination}
@@ -55,15 +45,14 @@ const Posts = ({ userId, data: user }: any) => {
                       <img
                         src={media.url}
                         alt={`Post ${idx} content ${mediaIdx}`}
-                        className="cursor-pointer object-cover w-full h-64 rounded-lg border"
-                        onClick={() => handleImageClick(media.url)}
+                        className="cursor-pointer object-cover w-full h-64 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 ease-in-out"
                       />
                     )}
                     {media.type === "VIDEO" && (
                       <video
                         src={media.url}
                         controls
-                        className="w-full h-auto cursor-pointer border"
+                        className="w-[300px] h-[260px] cursor-pointer border border-gray-300 rounded-lg shadow-md object-cover"
                       ></video>
                     )}
                   </div>
@@ -73,27 +62,6 @@ const Posts = ({ userId, data: user }: any) => {
           </div>
         </Link>
       ))}
-
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
-          onClick={closeModal}
-        >
-          <div className="relative max-w-full max-h-full">
-            <img
-              src={selectedImage}
-              alt="Zoomed"
-              className="max-w-full max-h-full object-contain"
-            />
-            <button
-              className="absolute top-2 right-2 text-white text-2xl bg-gray-900 rounded-full px-3 py-1"
-              onClick={closeModal}
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

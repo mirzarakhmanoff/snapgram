@@ -7,6 +7,7 @@ import {
   useUnfollowMutation,
 } from "../../redux/api/register-api";
 import Posts from "../../components/posts/Posts";
+import avatar from "../../assets/avatarka.jpg";
 
 const Profile: React.FC = () => {
   const { id: userId } = useParams<{ id: string }>();
@@ -65,8 +66,12 @@ const Profile: React.FC = () => {
     <div className="bg-black text-white min-h-screen p-6 absolute left-[300px]">
       <div className="flex items-center space-x-6 ">
         <div className="w-20 h-20 rounded-full bg-white overflow-hidden flex justify-center items-center">
-          <img src={data?.photo} alt="" />
+          <img
+            src={data?.photo?.includes("https") ? data.photo : avatar}
+            alt="Profile photo"
+          />
         </div>
+
         <div>
           <div className="flex items-center space-x-2">
             <h1 className="text-2xl font-bold">{data?.fullName}</h1>
