@@ -1,19 +1,47 @@
 # React + TypeScript + Vite
 
-Snapgram
+# Snapgram
+
 Snapgram is a social media application where users can share images and videos with followers in a streamlined, engaging interface. Inspired by popular social platforms, Snapgram combines seamless multimedia sharing with user-friendly features to provide a dynamic and immersive experience.
 
-Features
-Post Creation: Upload photos or videos to share with followers.
-Real-Time Interaction: Engage with followers through likes, comments, and direct messaging.
-Stories: Share moments that disappear after 24 hours, perfect for quick updates and highlights.
-Profile Customization: Personalize your profile with a profile picture, bio, and cover photos.
-Technologies Used
-Frontend: React, TypeScript, Swiper.js for slideshows, Tailwind CSS for styling
-State Management: Redux Toolkit for centralized state handling
-API: Uses RESTful APIs to manage data across the app
-Media Handling: Image and video processing with responsive design for an optimal user experience
-Installation
+# Features
+
+# Post Creation:
+
+Upload photos or videos to share with followers.
+
+# Real-Time Interaction:
+
+Engage with followers through likes, comments, and direct messaging.
+
+# Stories:
+
+Share moments that disappear after 24 hours, perfect for quick updates and highlights.
+
+# Profile Customization:
+
+Personalize your profile with a profile picture, bio, and cover photos.
+
+# Technologies Used
+
+# Frontend:
+
+React, TypeScript, Swiper.js for slideshows, Tailwind CSS for styling
+
+# State Management:
+
+Redux Toolkit for centralized state handling
+
+# API:
+
+Uses RESTful APIs to manage data across the app
+
+# Media Handling:
+
+Image and video processing with responsive design for an optimal user experience
+
+# Installation
+
 Clone the repository:
 bash
 Копировать код
