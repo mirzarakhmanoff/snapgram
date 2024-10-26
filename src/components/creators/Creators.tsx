@@ -71,7 +71,7 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
             ))}
         </div>
       ) : (
-        <div className="flex flex-wrap gap-5 items-center justify-between">
+        <div className="flex flex-wrap gap-5 items-center justify-center max-w-[900px]">
           {creators?.map((user: any) => (
             <div
               key={user._id}

@@ -26,7 +26,6 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
   };
 
   const [like] = useToggleLikeMutation({});
-
   const toggleLike = (id: any) => {
     like(id);
     setTimeout(() => {
@@ -40,7 +39,7 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
   return (
     <div
       key={post._id}
-      className="twitter-post bg-gray-800 shadow-md rounded-lg p-4 mb-6"
+      className="twitter-post bg-gray-800 shadow-md rounded-lg p-4 mb-6 max-w-full sm:max-w-md lg:max-w-lg mx-auto"
     >
       <Link to={`/profile/${post?.owner?.username}`}>
         <div className="post-header flex items-center mb-2">
@@ -77,12 +76,12 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
                   prevEl: `.swiper-button-prev-${post._id}`,
                   nextEl: `.swiper-button-next-${post._id}`,
                 }}
-                spaceBetween={50}
+                spaceBetween={20}
                 slidesPerView={1}
               >
                 {post.content?.map((content: any, index: string) => (
                   <SwiperSlide key={index}>
-                    <div className="relative w-full h-64 mb-2">
+                    <div className="relative w-full h-64 mb-2 sm:h-48 lg:h-64">
                       {content.type === "IMAGE" ? (
                         <img
                           src={content.url}
@@ -126,14 +125,12 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
         </div>
         <div className="flex items-center">
           <button>
-            {" "}
             <FaComment className="mr-1" />
           </button>
           <span>{post.comments.length}</span>
         </div>
         <div className="flex items-center">
           <button>
-            {" "}
             <FaShare className="mr-1" />
           </button>
           <span>{post.shares_count}</span>

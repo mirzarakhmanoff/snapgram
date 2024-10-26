@@ -79,13 +79,13 @@ const NewPost = () => {
     caption.trim() && location.trim() && altText.trim() && files.length > 0;
 
   return (
-    <div className="ml-[270px] flex justify-between overflow-hidden">
-      <div className="min-h-screen    mr-[100px] bg-black flex justify-start w-full">
+    <div className="md:ml-[100px] flex justify-start overflow-hidden flex-wrap  lg:flex-nowrap ">
+      <div className="md:min-h-screen bg-black flex  w-full p-4 md:p-8">
         <form
           onSubmit={handleSubmit}
-          className="w-full p-6 bg-gray-900 rounded-lg"
+          className="w-full max-w-lg md:max-w-2xl p-6 bg-gray-900 rounded-lg"
         >
-          <h1 className="text-white text-2xl font-semibold mb-4">
+          <h1 className="text-white text-xl md:text-2xl font-semibold mb-4">
             Create a Post
           </h1>
 
@@ -103,30 +103,28 @@ const NewPost = () => {
             <label className="block text-gray-400 mb-1">
               Add Photos/Videos
             </label>
-            <div className="w-full bg-gray-800 p-6 rounded-md flex justify-center items-center relative">
+            <div className="w-full bg-gray-800 p-4 rounded-md flex justify-center items-center relative">
               {files.length > 0 ? (
-                <div className="flex gap-3 flex-col">
-                  <div className="flex gap-3 items-center justify-center">
-                    {files.map((file, index) => (
-                      <div key={file.name} className="relative">
-                        <img
-                          className="w-[100px] h-[100px] object-cover"
-                          src={URL.createObjectURL(file)}
-                          alt=""
-                        />
-                        <button
-                          type="button"
-                          className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
-                          onClick={() => handleRemoveFile(index)}
-                        >
-                          <AiOutlineClose size={16} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+                <div className="flex flex-wrap gap-3">
+                  {files.map((file, index) => (
+                    <div key={file.name} className="relative">
+                      <img
+                        className="w-[80px] h-[80px] object-cover md:w-[100px] md:h-[100px]"
+                        src={URL.createObjectURL(file)}
+                        alt=""
+                      />
+                      <button
+                        type="button"
+                        className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                        onClick={() => handleRemoveFile(index)}
+                      >
+                        <AiOutlineClose size={16} />
+                      </button>
+                    </div>
+                  ))}
                 </div>
               ) : (
-                <div className="text-center text-gray-500 flex flex-col gap-3">
+                <div className="text-center text-gray-500 flex flex-col gap-2">
                   <p>Drag photos and videos here</p>
                   <p className="text-sm">
                     SVG, PNG, JPG or GIF (max. 800x400px)
@@ -134,7 +132,7 @@ const NewPost = () => {
                   <button
                     type="button"
                     onClick={handleSelectImage}
-                    className=" bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
                   >
                     Select Image
                   </button>
@@ -179,11 +177,11 @@ const NewPost = () => {
             <button
               type="submit"
               disabled={!isFormValid || isLoading}
-              className={`bg-purple-600 text-white px-4 py-2 rounded-md flex justify-center items-center hover:bg-purple-700 ${
+              className={`bg-purple-600 text-white px-4 py-2 rounded-md flex items-center hover:bg-purple-700 ${
                 !isFormValid || isLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              {isLoading ? <FaSpinner className="animate-spin mr-2" /> : null}
+              {isLoading && <FaSpinner className="animate-spin mr-2" />}
               {isLoading ? "Loading..." : "Share Post"}
             </button>
           </div>

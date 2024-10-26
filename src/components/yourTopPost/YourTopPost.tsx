@@ -5,7 +5,7 @@ const YourTopPost = () => {
   const user = JSON.parse(localStorage.getItem("user")!);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center pt-10">
+    <div className="min-h-screen bg-black flex flex-col items-center ml-[80px]  md:pt-10 ">
       <div className="w-32 h-32 rounded-full mb-4">
         <img
           src={user?.photo?.includes("https") ? user?.photo : profileimg}

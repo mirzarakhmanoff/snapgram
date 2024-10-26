@@ -41,20 +41,12 @@ const People = () => {
     }
   }, [limit, refetch]);
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex items-center justify-center h-screen">
-  //       <ClipLoader color={"#fff"} size={50} />
-  //     </div>
-  //   );
-  // }
-
   if (error) {
     return <p className="text-red-500 text-center">Error loading posts.</p>;
   }
 
   return (
-    <div className="p-6 ml-[300px]">
+    <div className="p-6 ">
       <div className="flex items-center justify-center gap-20">
         <Creators
           creators={creators}
