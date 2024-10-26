@@ -39,7 +39,7 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
   return (
     <div
       key={post._id}
-      className="twitter-post bg-gray-800 shadow-md rounded-lg p-4 mb-6 max-w-full sm:max-w-md lg:max-w-lg mx-auto"
+      className="twitter-post bg-gray-800 shadow-md rounded-lg p-4 mb-6 w-full max-w-md sm:max-w-lg lg:max-w-2xl mx-auto"
     >
       <Link to={`/profile/${post?.owner?.username}`}>
         <div className="post-header flex items-center mb-2">
@@ -53,10 +53,10 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
             className="w-10 h-10 rounded-full mr-3 object-contain"
           />
           <div>
-            <span className="user-name font-semibold text-white">
+            <span className="user-name font-semibold text-white text-sm sm:text-base">
               {post?.owner.username}
             </span>
-            <span className="date text-gray-400 text-sm block">
+            <span className="date text-gray-400 text-xs sm:text-sm block">
               {post?.createdAt}
             </span>
           </div>
@@ -65,10 +65,12 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
 
       <Link to={`/post/${post?.owner?.username}/${post._id}`}>
         <div className="post-content mb-4">
-          <p className="text-gray-300">{post.content_alt}</p>
+          <p className="text-gray-300 text-sm sm:text-base">
+            {post.content_alt}
+          </p>
 
           {post.content.length > 0 && (
-            <div className="image-container my-4 max-w-[600px] w-full mx-auto">
+            <div className="image-container my-4 max-w-full w-full mx-auto">
               <Swiper
                 modules={[Pagination, Navigation]}
                 pagination={pagination}
@@ -81,7 +83,7 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
               >
                 {post.content?.map((content: any, index: string) => (
                   <SwiperSlide key={index}>
-                    <div className="relative w-full h-64 mb-2 sm:h-48 lg:h-64">
+                    <div className="relative w-full h-48 sm:h-56 lg:h-64 mb-2">
                       {content.type === "IMAGE" ? (
                         <img
                           src={content.url}
@@ -92,7 +94,7 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
                       ) : (
                         <video
                           controls
-                          className="w-full h-full rounded-lg"
+                          className="w-full h-full rounded-lg object-cover"
                           src={content.url}
                         ></video>
                       )}
@@ -112,7 +114,7 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
         </div>
       </Link>
 
-      <div className="post-actions flex justify-start gap-3 text-gray-400 mb-4">
+      <div className="post-actions flex justify-between gap-3 text-gray-400 mb-4 text-xs sm:text-sm">
         <div className="flex items-center">
           <button onClick={() => toggleLike(post._id)}>
             {!isLiked ? (

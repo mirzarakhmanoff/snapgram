@@ -13,7 +13,7 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
 }) => {
   return (
     <div
-      className={`bg-gray-700 animate-pulse`}
+      className={`bg-gray-700 animate-pulse `}
       style={{
         width,
         height,

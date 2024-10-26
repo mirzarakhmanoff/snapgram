@@ -29,14 +29,14 @@ const Home = () => {
     };
   }, [navigate]);
 
-  if (error) {
-    navigate("/login");
-    return null;
-  }
+  // if (error) {
+  //   navigate("/login");
+  //   return null;
+  // }
 
   return (
     <div className="flex bg-black">
-      <div className="flex-1 ml-[100px] md:ml-[270px] md:mr-[465px] pt-6">
+      <div className="flex-1 ml-[100px] md:ml-[50px]  rounded-lg text-[#001011] md:mr-[465px] pt-6">
         <Stories />
         <HomeFeed />
       </div>

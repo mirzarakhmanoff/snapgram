@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useGetPostCommentsQuery,
   useGetSinglePostQuery,
@@ -38,15 +38,15 @@ const SinglePostPage = () => {
 
   return (
     <div className="flex min-h-screen bg-black ml-[300px]">
-      <div className="flex bg-[#1d1d1d] text-white rounded-2xl p-6 w-[1200px]">
-        <div onClick={handleGoBack} className="cursor-pointer block h-max">
+      <div className="flex bg-[#1d1d1d] text-white  p-6 w-[1200px] flex-wrap">
+        <div onClick={handleGoBack} className="cursor-pointer block h-max  ">
           <FaChevronCircleLeft className="text-5xl" />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 mt-[50px] ">
           {isLoading ? (
-            <SkeletonLoader width="600px" height="700px" borderRadius="15px" />
+            <SkeletonLoader width="600px" height="450px" borderRadius="15px" />
           ) : (
-            <div className="image-container  max-w-[600px] h-[500px] mt-[50px] rounded-md  w-full flex items-center justify-center mx-auto  border ">
+            <div className="image-container  max-w-[600px] h-[500px] mt-[50px] rounded-md  w-full flex items-center justify-center mx-auto  border-hidden ">
               <Swiper
                 modules={[Pagination, Navigation]}
                 pagination={pagination}
@@ -64,7 +64,7 @@ const SinglePostPage = () => {
                         <img
                           src={content.url}
                           alt={`Post content ${index + 1}`}
-                          className="w-full h-full rounded-lg cursor-pointer object-cover"
+                          className="w-full h-full rounded-lg cursor-pointer object-contain"
                         />
                       ) : (
                         <video
@@ -88,43 +88,51 @@ const SinglePostPage = () => {
         </div>
 
         <div className="flex-1 ml-6">
-          <div className="flex items-center mb-4">
-            {isLoading ? (
-              <SkeletonLoader width="96px" height="96px" borderRadius="50%" />
-            ) : (
-              <img
-                src={
-                  data?.owner?.photo?.includes("https")
-                    ? data?.owner?.photo
-                    : profileimg
-                }
-                alt={
-                  data?.owner?.photo ? "Profile photo" : "Default profile photo"
-                }
-                className="w-24 h-24 rounded-full object-cover mb-2"
-              />
-            )}
+          <Link to={`/profile/${username}`}>
+            <div className="flex items-center mb-4">
+              {isLoading ? (
+                <SkeletonLoader width="96px" height="96px" borderRadius="50%" />
+              ) : (
+                <img
+                  src={
+                    data?.owner?.photo?.includes("https")
+                      ? data?.owner?.photo
+                      : profileimg
+                  }
+                  alt={
+                    data?.owner?.photo
+                      ? "Profile photo"
+                      : "Default profile photo"
+                  }
+                  className="w-24 h-24 rounded-full object-cover mb-2"
+                />
+              )}
 
-            <div className="ml-4">
-              <h2 className="font-bold">
-                {isLoading ? (
-                  <SkeletonLoader width="150px" />
-                ) : (
-                  data?.owner.fullName
-                )}
-              </h2>
-              <p className="text-gray-400">
-                {isLoading ? (
-                  <SkeletonLoader width="100px" />
-                ) : (
-                  `@${data?.owner.username}`
-                )}
-              </p>
-              <span className="text-sm text-gray-500">
-                {isLoading ? <SkeletonLoader width="80px" /> : data?.createdAt}
-              </span>
+              <div className="ml-4">
+                <h2 className="font-bold">
+                  {isLoading ? (
+                    <SkeletonLoader width="150px" />
+                  ) : (
+                    data?.owner.fullName
+                  )}
+                </h2>
+                <p className="text-gray-400">
+                  {isLoading ? (
+                    <SkeletonLoader width="100px" />
+                  ) : (
+                    `@${data?.owner.username}`
+                  )}
+                </p>
+                <span className="text-sm text-gray-500">
+                  {isLoading ? (
+                    <SkeletonLoader width="80px" />
+                  ) : (
+                    data?.createdAt
+                  )}
+                </span>
+              </div>
             </div>
-          </div>
+          </Link>
 
           <p className="text-lg">
             {isLoading ? (
@@ -138,7 +146,7 @@ const SinglePostPage = () => {
 
           <div className="h-[350px] overflow-scroll">
             {isLoading ? (
-              <SkeletonLoader width="100%" height="150px" />
+              <SkeletonLoader width="100%" height="300px" />
             ) : comments?.length === 0 ? (
               <div className="mx-auto flex flex-col items-center justify-center p-4">
                 <p className="block text-lg font-bold text-center text-white">
