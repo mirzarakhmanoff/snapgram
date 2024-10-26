@@ -44,7 +44,7 @@ const SideBar = () => {
   }
 
   return (
-    <div className="bg-black p-4 w-[270px] fixed top-0 left-0 h-screen">
+    <div className="bg-black p-4  w-[80px] md:w-[270px] fixed top-0 left-0 h-screen">
       {" "}
       <div className="mb-5">
         <Link to="/" className="flex gap-2 items-center text-white">

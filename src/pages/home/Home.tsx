@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <div className="flex bg-black">
-      <div className="flex-1 ml-[270px] mr-[465px] pt-6">
+      <div className="flex-1 ml-[100px] md:ml-[270px] md:mr-[465px] pt-6">
         <Stories />
         <HomeFeed />
       </div>

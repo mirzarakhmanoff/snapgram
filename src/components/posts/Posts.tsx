@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 const Posts = ({ userId, data: user }: any) => {
   const { data: posts, isLoading } = useGetUserPostsQuery({ userId });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  console.log(posts);
 
   const handleImageClick = (imageUrl: string) => {
     setSelectedImage(imageUrl);

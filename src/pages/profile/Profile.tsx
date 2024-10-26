@@ -63,7 +63,7 @@ const Profile: React.FC = () => {
 
   return (
     <div className="bg-black text-white min-h-screen p-6 absolute left-[300px]">
-      <div className="flex items-center space-x-6">
+      <div className="flex items-center space-x-6 ">
         <div className="w-20 h-20 rounded-full bg-white overflow-hidden flex justify-center items-center">
           <img src={data?.photo} alt="" />
         </div>

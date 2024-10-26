@@ -3,7 +3,6 @@ import profileimg from "../../assets/avatarka.jpg";
 
 const YourTopPost = () => {
   const user = JSON.parse(localStorage.getItem("user")!);
-  console.log(user);
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center pt-10">
