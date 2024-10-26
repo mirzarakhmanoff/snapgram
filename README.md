@@ -34,7 +34,7 @@ Snapgram is a social media application where users can share images and videos w
    ```
 4. **Run the app**:
    ```bash
-   npm start
+   npm run dev
    ```
 
 ## Usage
