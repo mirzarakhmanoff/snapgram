@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetPostCommentsQuery,
   useGetSinglePostQuery,
@@ -13,6 +13,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import PostActions from "../../components/postActions/PostActions";
+import UserProfile from "../../components/userProfile/UserProfile";
 
 const SinglePostPage = () => {
   const { username, id } = useParams<{ username: string; id: string }>();
@@ -89,51 +90,29 @@ const SinglePostPage = () => {
         </div>
 
         <div className="flex-1 ml-6">
-          <Link to={`/profile/${username}`}>
+          {isLoading ? (
             <div className="flex items-center mb-4">
-              {isLoading ? (
-                <SkeletonLoader width="96px" height="96px" borderRadius="50%" />
-              ) : (
-                <img
-                  src={
-                    data?.owner?.photo?.includes("https")
-                      ? data?.owner?.photo
-                      : profileimg
-                  }
-                  alt={
-                    data?.owner?.photo
-                      ? "Profile photo"
-                      : "Default profile photo"
-                  }
-                  className="w-24 h-24 rounded-full object-cover mb-2"
-                />
-              )}
-
+              <SkeletonLoader width="96px" height="96px" borderRadius="50%" />
               <div className="ml-4">
-                <h2 className="font-bold">
-                  {isLoading ? (
-                    <SkeletonLoader width="150px" />
-                  ) : (
-                    data?.owner.fullName
-                  )}
-                </h2>
-                <p className="text-gray-400">
-                  {isLoading ? (
-                    <SkeletonLoader width="100px" />
-                  ) : (
-                    `@${data?.owner.username}`
-                  )}
-                </p>
-                <span className="text-sm text-gray-500">
-                  {isLoading ? (
-                    <SkeletonLoader width="80px" />
-                  ) : (
-                    data?.createdAt
-                  )}
-                </span>
+                <SkeletonLoader width="150px" height="20px" />
+                <SkeletonLoader width="100px" height="16px" />
+                <SkeletonLoader width="80px" height="14px" />
               </div>
             </div>
-          </Link>
+          ) : (
+            <UserProfile
+              userData={{
+                username: data?.owner?.username || "username",
+                photo: data?.owner?.photo?.includes("https")
+                  ? data.owner.photo
+                  : profileimg,
+                createdAt: data?.createdAt,
+              }}
+              linkPrefix={`/profile`}
+              showDate={true}
+              showFullName={false}
+            />
+          )}
 
           <p className="text-lg">
             {isLoading ? (
