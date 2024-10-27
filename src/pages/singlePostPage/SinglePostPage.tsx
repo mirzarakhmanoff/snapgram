@@ -3,12 +3,7 @@ import {
   useGetPostCommentsQuery,
   useGetSinglePostQuery,
 } from "../../redux/api/post-api";
-import {
-  FaHeart,
-  FaComment,
-  FaShare,
-  FaChevronCircleLeft,
-} from "react-icons/fa";
+import { FaHeart, FaChevronCircleLeft } from "react-icons/fa";
 import profileimg from "../../assets/avatarka.jpg";
 import CommentInput from "../../components/commentInput/CommentInput";
 import SkeletonLoader from "./SkeletonLoader";
@@ -17,10 +12,16 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import PostActions from "../../components/postActions/PostActions";
 
 const SinglePostPage = () => {
   const { username, id } = useParams<{ username: string; id: string }>();
-  const { data, isLoading, isError } = useGetSinglePostQuery({ username, id });
+  const {
+    data,
+    isLoading,
+    isError,
+    refetch: fetching,
+  } = useGetSinglePostQuery({ username, id });
   const { data: comments, refetch } = useGetPostCommentsQuery({ id });
   const navigate = useNavigate();
 
@@ -175,20 +176,7 @@ const SinglePostPage = () => {
             )}
           </div>
 
-          <div className="flex items-center mt-6 space-x-6">
-            <div className="flex items-center space-x-2">
-              <FaHeart />
-              <span>{data?.likes?.length}</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <FaComment />
-              <span>{data?.comments?.length}</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <FaShare />
-              <span>{data?.shares}</span>
-            </div>
-          </div>
+          <PostActions refetch={fetching} post={data} />
 
           <CommentInput id={String(data?._id)} refetch={refetch} />
         </div>

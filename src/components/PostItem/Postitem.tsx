@@ -1,11 +1,10 @@
 import { FC } from "react";
-import { FaComment, FaHeart, FaRegHeart, FaShare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import avatar from "../../assets/avatarka.jpg";
-import { useToggleLikeMutation } from "../../redux/api/post-api";
 import CommentInput from "../commentInput/CommentInput";
+import PostActions from "../postActions/PostActions";
+import UserProfile from "../userProfile/UserProfile";
 
 interface PostItemProps {
   post: any;
@@ -25,43 +24,20 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
     },
   };
 
-  const [like] = useToggleLikeMutation({});
-  const toggleLike = (id: any) => {
-    like(id);
-    setTimeout(() => {
-      refetch();
-    }, 100);
-  };
-
-  const user = JSON.parse(localStorage.getItem("user")!);
-  const isLiked = post.likes.includes(user._id);
-
   return (
     <div
       key={post._id}
       className="twitter-post bg-gray-800 shadow-md rounded-lg p-4 mb-6 w-full max-w-md sm:max-w-lg lg:max-w-2xl mx-auto"
     >
-      <Link to={`/profile/${post?.owner?.username}`}>
-        <div className="post-header flex items-center mb-2">
-          <img
-            src={
-              post.owner?.photo && post.owner.photo.includes("https")
-                ? post.owner.photo
-                : avatar
-            }
-            alt="avatar"
-            className="w-10 h-10 rounded-full mr-3 object-contain"
-          />
-          <div>
-            <span className="user-name font-semibold text-white text-sm sm:text-base">
-              {post?.owner.username}
-            </span>
-            <span className="date text-gray-400 text-xs sm:text-sm block">
-              {post?.createdAt}
-            </span>
-          </div>
-        </div>
-      </Link>
+      <UserProfile
+        userData={{
+          username: post?.owner?.username,
+          photo: post?.owner?.photo,
+          createdAt: post?.createdAt,
+        }}
+        showFullName={false}
+        showDate={true}
+      />
 
       <Link to={`/post/${post?.owner?.username}/${post._id}`}>
         <div className="post-content mb-4">
@@ -113,34 +89,7 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
           )}
         </div>
       </Link>
-
-      <div className="post-actions flex gap-3 text-gray-400 mb-4 text-xs sm:text-sm">
-        <div className="flex items-center">
-          <button onClick={() => toggleLike(post._id)}>
-            {!isLiked ? (
-              <FaRegHeart className="mr-1 " />
-            ) : (
-              <FaHeart className="mr-1 text-red-700 text-xl" />
-            )}
-          </button>
-          <span>{post.likes.length}</span>
-        </div>
-        <div className="flex items-center">
-          <Link to={`/post/${post?.owner?.username}/${post._id}`}>
-            <button>
-              <FaComment className="mr-1 text-xl" />
-            </button>
-          </Link>
-          <span>{post.comments.length}</span>
-        </div>
-        <div className="flex items-center">
-          <button>
-            <FaShare className="mr-1 text-xl" />
-          </button>
-          <span>{post.shares_count}</span>
-        </div>
-      </div>
-
+      <PostActions refetch={refetch} post={post} />
       <CommentInput id={String(post._id)} />
     </div>
   );

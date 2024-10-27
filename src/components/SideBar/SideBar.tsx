@@ -1,6 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/Union.svg";
-import profileimg from "../../assets/avatarka.jpg";
 import Button from "@mui/material/Button";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -19,6 +18,7 @@ import icon9 from "../../assets/Wallpaper.svg";
 import { useGetProfileQuery } from "../../redux/api/register-api";
 import { Dialog } from "@mui/material";
 import React from "react";
+import UserProfile from "../userProfile/UserProfile";
 
 const SideBar = () => {
   const [open, setOpen] = React.useState(false);
@@ -52,25 +52,14 @@ const SideBar = () => {
           <p className="text-xl font-semibold hidden md:block">Snapgram</p>{" "}
         </Link>
       </div>
-      <Link to={`/profile/${data?.username}`}>
-        <div className="flex items-center mb-3 gap-3">
-          <img
-            src={data?.photo?.includes("https") ? data?.photo : profileimg}
-            alt="Profile"
-            className="w-12 h-12 rounded-full"
-          />
-          <div className="text-center">
-            <h5 className="text-[10px] text-white font-semibold hidden md:block">
-              {" "}
-              {data?.fullName || "Unknown User"}
-            </h5>
-            <span className="text-gray-400 text-sm hidden md:block">
-              {" "}
-              {`@${data?.username || "username"}`}
-            </span>
-          </div>
-        </div>
-      </Link>
+      <UserProfile
+        userData={{
+          username: data?.username,
+          fullName: data?.fullName,
+          photo: data?.photo,
+        }}
+        showFullName={true}
+      />
       <div className="flex flex-col gap-6">
         <ul className="mb-4">
           {[

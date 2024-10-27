@@ -29,6 +29,12 @@ export const productApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    getCommentOwner: build.query({
+      query: ({ id }) => ({
+        url: `api/user/id/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -37,4 +43,5 @@ export const {
   usePostCommentMutation,
   useGetSinglePostQuery,
   useGetPostCommentsQuery,
+  useGetCommentOwnerQuery,
 } = productApi;
