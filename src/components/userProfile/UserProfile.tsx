@@ -24,7 +24,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
   const { username, fullName, photo, createdAt } = userData;
 
   return (
-    <div className="p-4 rounded-lg shadow-lg">
+    <div className="p-4 g">
       <Link to={`${linkPrefix}/${username || "username"}`}>
         <div className="flex items-center gap-4">
           <img

@@ -1,7 +1,5 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import CommentInput from "../commentInput/CommentInput";
 import PostActions from "../postActions/PostActions";
 import UserProfile from "../userProfile/UserProfile";
@@ -15,13 +13,6 @@ interface PostItemProps {
 const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
   const handleImageClick = (imageUrl: string) => {
     setGalleryImage(imageUrl);
-  };
-
-  const pagination = {
-    clickable: true,
-    renderBullet: function (_: any, className: string) {
-      return `<span class="${className} border border-white-500 bg-white-500 text-white w-2 h-2 p-1 rounded-full inline-block"></span>`;
-    },
   };
 
   return (
@@ -47,48 +38,27 @@ const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
 
           {post.content.length > 0 && (
             <div className="image-container my-4 max-w-full w-full mx-auto">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={pagination}
-                navigation={{
-                  prevEl: `.swiper-button-prev-${post._id}`,
-                  nextEl: `.swiper-button-next-${post._id}`,
-                }}
-                spaceBetween={20}
-                slidesPerView={1}
-              >
-                {post.content?.map((content: any, index: string) => (
-                  <SwiperSlide key={index}>
-                    <div className="relative w-full h-48 sm:h-56 lg:h-64 mb-2">
-                      {content.type === "IMAGE" ? (
-                        <img
-                          src={content.url}
-                          alt={`Post content ${index + 1}`}
-                          className="w-full h-full rounded-lg cursor-pointer object-contain"
-                          onClick={() => handleImageClick(content.url)}
-                        />
-                      ) : (
-                        <video
-                          controls
-                          className="w-full h-full rounded-lg object-cover"
-                          src={content.url}
-                        ></video>
-                      )}
-                    </div>
-                  </SwiperSlide>
-                ))}
-
-                <div
-                  className={`swiper-button-prev swiper-button-prev-${post._id} text-white`}
-                />
-                <div
-                  className={`swiper-button-next swiper-button-next-${post._id} text-white`}
-                />
-              </Swiper>
+              <div className="relative w-full h-48 sm:h-56 lg:h-64 mb-2">
+                {post.content[0].type === "IMAGE" ? (
+                  <img
+                    src={post.content[0].url}
+                    alt={`Post content 1`}
+                    className="w-full h-full rounded-lg cursor-pointer object-contain"
+                    onClick={() => handleImageClick(post.content[0].url)}
+                  />
+                ) : (
+                  <video
+                    controls
+                    className="w-full h-full rounded-lg object-cover"
+                    src={post.content[0].url}
+                  />
+                )}
+              </div>
             </div>
           )}
         </div>
       </Link>
+
       <PostActions refetch={refetch} post={post} />
       <CommentInput id={String(post._id)} />
     </div>
