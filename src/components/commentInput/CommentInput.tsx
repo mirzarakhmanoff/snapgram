@@ -29,7 +29,7 @@ const CommentInput: React.FC<CommentInputProps> = ({ id, refetch }) => {
 
   return (
     <div>
-      <div className="comment-section flex items-center justify-center gap-4 mt-3 ">
+      <div className="comment-section flex items-center justify-center gap-4 mt-3  ">
         <img
           src={user?.photo?.includes("https") ? user?.photo : profileimg}
           alt={user?.photo ? "Profile photo" : "Default profile photo"}

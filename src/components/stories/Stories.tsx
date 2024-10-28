@@ -18,7 +18,7 @@ const users: UserItems[] = [
 ];
 
 const SkeletonLoader = () => (
-  <div className="border-4 border-gray-600 w-[72px] h-[72px] rounded-full overflow-hidden animate-pulse bg-gray-700"></div>
+  <div className="border-4 border-gray-600 w-[72px] h-[72px] rounded-full overflow-hidden animate-pulse bg-gray-700 "></div>
 );
 
 const Stories = () => {
