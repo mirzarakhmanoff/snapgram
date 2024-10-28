@@ -8,6 +8,7 @@ import SignUp from "../pages/sign-up/SignUp";
 import Login from "../pages/login/Login";
 import Error from "../pages/error/Error";
 import SinglePostPage from "../pages/singlePostPage/SinglePostPage";
+import Explore from "../pages/explore/Explore";
 const Home: LazyExoticComponent<any> = lazy(() => import("../pages/home/Home"));
 const Layout: LazyExoticComponent<any> = lazy(
   () => import("../pages/layout/Layout")
@@ -62,6 +63,14 @@ const Routers = () => {
           element: (
             <Suspense>
               <SinglePostPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/explore",
+          element: (
+            <Suspense>
+              <Explore />
             </Suspense>
           ),
         },

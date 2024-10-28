@@ -35,6 +35,13 @@ export const productApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    getAllPosts: build.query({
+      query: (params) => ({
+        url: `api/post`,
+        method: "GET",
+        params,
+      }),
+    }),
   }),
 });
 
@@ -44,4 +51,5 @@ export const {
   useGetSinglePostQuery,
   useGetPostCommentsQuery,
   useGetCommentOwnerQuery,
+  useGetAllPostsQuery,
 } = productApi;

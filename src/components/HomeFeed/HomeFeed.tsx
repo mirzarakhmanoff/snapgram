@@ -53,7 +53,7 @@ const HomeFeed = () => {
     return <p className="text-red-500 text-center">Error loading posts.</p>;
 
   return (
-    <div className="container mx-auto p-4  ml-[50px]">
+    <div className="container mx-auto p-4 ">
       <div className=" p-4 rounded-lg shadow-md mb-4">
         <div className="text-white flex items-center justify-between">
           <h2 className="text-3xl font-bold">Home Feed</h2>
