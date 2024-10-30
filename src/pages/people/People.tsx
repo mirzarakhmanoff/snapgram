@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Creators from "../../components/creators/Creators";
 import { useGetUserQuery } from "../../redux/api/register-api";
 import { ClipLoader } from "react-spinners";
+import Search from "../../components/search/Search";
 
 const People = () => {
   const [limit, setLimit] = useState(15);
@@ -46,7 +47,8 @@ const People = () => {
   }
 
   return (
-    <div className="p-6 ">
+    <div className="p-6  ml-[100px]">
+      <Search />
       <div className="flex items-center justify-center gap-20">
         <Creators
           creators={creators}

@@ -24,21 +24,22 @@ const UserProfile: React.FC<UserProfileProps> = ({
   const { username, fullName, photo, createdAt } = userData;
 
   return (
-    <div className="p-4 g">
+    <div className="p-4 ">
       <Link to={`${linkPrefix}/${username || "username"}`}>
         <div className="flex items-center gap-4">
           <img
             src={photo?.includes("https") ? photo : avatar}
             alt="Profile"
-            className="w-12 h-12 rounded-full object-cover"
+            className="w-16 h-16 border rounded-full object-cover"
           />
-          <div>
+
+          <div className="hidden sm:block">
             {showFullName && (
               <h5 className="text-[12px] font-semibold text-white">
                 {fullName || "Unknown User"}
               </h5>
             )}
-            <span className="text-[18px] text-gray-300">
+            <span className="text-[18px] text-gray-300 ">
               @{username || "username"}
             </span>
             {showDate && (

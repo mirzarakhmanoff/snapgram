@@ -1,8 +1,9 @@
-import { FaSearch, FaHeart, FaRegComment } from "react-icons/fa";
+import { FaHeart, FaRegComment } from "react-icons/fa";
 import { useGetAllPostsQuery } from "../../redux/api/post-api";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import SkeletonLoader from "../singlePostPage/SkeletonLoader";
+import Search from "../../components/search/Search";
 
 const hashtags = ["mountains", "webdevelopment", "funny", "modeling"];
 
@@ -15,14 +16,7 @@ const Explore = () => {
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">Search Hashtags</h1>
 
-        <div className="relative mb-6">
-          <input
-            type="text"
-            placeholder="Search Creators"
-            className="w-full p-4 pl-10 rounded-full bg-gray-800 text-gray-300 placeholder-gray-500"
-          />
-          <FaSearch className="absolute left-4 top-4 text-gray-500" />
-        </div>
+        <Search />
 
         <div className="flex flex-wrap gap-3 mb-10 justify-center">
           {hashtags.map((tag) => (
@@ -45,7 +39,7 @@ const Explore = () => {
             : data?.slice(0, offSet).map((post: any) => (
                 <Link
                   to={`/post/${post.owner.username}/${post._id}`}
-                  key={post.id}
+                  key={post._id}
                 >
                   <div className="relative group overflow-hidden rounded-lg bg-gray-800 shadow-lg h-[300px]">
                     {post?.content[0]?.type === "IMAGE" ? (
