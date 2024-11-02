@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetuserProfileQuery } from "../../redux/api/register-api";
-import FollowersItem from "./FOllowersItem";
+import FollowersItem from "./FollowersItem";
 
 const Followers = () => {
   const id = useParams();
