@@ -1,6 +1,5 @@
-import React from "react";
 import { FaCheckCircle, FaEdit } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   useFollowMutation,
   useGetuserProfileQuery,
@@ -14,6 +13,7 @@ const Profile: React.FC = () => {
   const { data, isLoading, error } = useGetuserProfileQuery(userId);
 
   const currentUser = JSON.parse(localStorage.getItem("user") as string);
+
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
 
@@ -118,10 +118,12 @@ const Profile: React.FC = () => {
           <span>Posts</span>
         </div>
         <div>
-          <span className="block text-lg font-bold text-white">
-            {data?.followers.length}
-          </span>
-          <span>Followers</span>
+          <Link to={`/followers/${data.username}`}>
+            <span className="block text-lg font-bold text-white">
+              {data?.followers.length}
+            </span>
+            <span>Followers</span>
+          </Link>
         </div>
         <div>
           <span className="block text-lg font-bold text-white">
