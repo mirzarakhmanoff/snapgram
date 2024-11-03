@@ -133,7 +133,6 @@ const Profile: React.FC = () => {
         </div>
       </div>
 
-      {/* Описание профиля */}
       <div className="mt-6 text-gray-400">
         <p>For Developers, By Developers</p>
         <p>💻 Web Development & Coding</p>
