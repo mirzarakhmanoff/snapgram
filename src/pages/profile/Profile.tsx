@@ -126,10 +126,12 @@ const Profile: React.FC = () => {
           </Link>
         </div>
         <div>
-          <span className="block text-lg font-bold text-white">
-            {data?.following.length}
-          </span>
-          <span>Following</span>
+          <Link to={`/following/${data.username}`}>
+            <span className="block text-lg font-bold text-white">
+              {data?.following.length}
+            </span>
+            <span>Following</span>
+          </Link>
         </div>
       </div>
 

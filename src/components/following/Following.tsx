@@ -2,19 +2,19 @@ import { useParams, Link } from "react-router-dom";
 import { useGetuserProfileQuery } from "../../redux/api/register-api";
 import FollowersItem from "../followersItem/FollowersItem";
 
-const Followers = () => {
+const Following = () => {
   const { username } = useParams();
   const { data } = useGetuserProfileQuery(username);
 
-  const count = data?.followers?.length || 0;
+  const count = data?.following?.length || 0;
 
   return (
-    <div className="mt-[50px] flex flex-col items-center justify-center  h-screen">
+    <div className="mt-[50px] flex flex-col items-center justify-center h-screen">
       {count <= 0 ? (
         <div className="flex flex-col items-center text-gray-300">
           <p className="text-center text-lg mb-4 max-w-md">
-            Вам еще ни кто не подписался! Подпишитесь чтобы лучше
-            взаимодействовать
+            Вы еще ни на кого не подписаны! Подпишитесь на людей, чтобы лучше
+            взаимодействовать.
           </p>
           <Link
             to="/people"
@@ -25,7 +25,7 @@ const Followers = () => {
         </div>
       ) : (
         <div className="w-full flex flex-col items-center">
-          {data?.followers.map((item: any) => (
+          {data?.following.map((item: any) => (
             <FollowersItem key={item.id} data={item} count={count} />
           ))}
         </div>
@@ -34,4 +34,4 @@ const Followers = () => {
   );
 };
 
-export default Followers;
+export default Following;
