@@ -3,8 +3,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Pagination } from "swiper/modules";
 import { Link } from "react-router-dom";
+import { ContentItem, PostImageData, PostsProps } from "../../types";
 
-const Posts = ({ userId, data: user }: any) => {
+const Posts = ({ userId, data: user }: PostsProps) => {
   const { data: posts, isLoading } = useGetUserPostsQuery({ userId });
 
   const pagination = {
@@ -29,7 +30,7 @@ const Posts = ({ userId, data: user }: any) => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-      {posts?.map((post: any, idx: number) => (
+      {posts?.map((post: PostImageData, idx: number) => (
         <Link to={`/post/${user.username}/${post._id}`} key={idx}>
           <div className="w-[300px] h-[300px]">
             <Swiper
@@ -38,7 +39,7 @@ const Posts = ({ userId, data: user }: any) => {
               spaceBetween={50}
               slidesPerView={1}
             >
-              {post?.content?.map((media: any, mediaIdx: number) => (
+              {post?.content?.map((media: ContentItem, mediaIdx: number) => (
                 <SwiperSlide key={mediaIdx}>
                   <div>
                     {media.type === "IMAGE" && (

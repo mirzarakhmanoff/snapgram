@@ -64,8 +64,8 @@ export interface PostType {
       type: "AUDIO" | "VIDEO" | "IMAGE";
     }
   ];
-  likes_count: number;
-  comments_count: number;
+  likes: string[];
+  comments: string[];
   shares_count: number;
   owner: any;
   photo: string;
@@ -78,6 +78,7 @@ export interface ContentItem {
 
 export interface PostImageData {
   content: ContentItem[];
+  _id: string;
 }
 
 export interface PostImageProps {
@@ -119,7 +120,6 @@ export interface Follower {
   photo?: string;
 }
 
-// Removed duplicate PostData declaration
 export interface PostData {
   posts: PostType[];
 }
@@ -131,7 +131,7 @@ export interface PostProps {
 }
 
 export interface PostActionsProps {
-  refetch: () => void;
+  refetch?: () => void;
   post: PostType;
 }
 
@@ -139,4 +139,11 @@ export interface PosterProps {
   data: PostType[];
   offSet: number;
   isLoading: boolean;
+}
+
+export interface PostsProps {
+  userId: string;
+  data: {
+    username: string;
+  };
 }

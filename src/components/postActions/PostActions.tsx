@@ -10,21 +10,24 @@ import { useToggleLikeMutation } from "../../redux/api/post-api";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSave } from "../../redux/slice/saved-slice";
 import { FC } from "react";
-import { PostActionsProps } from "../../types";
+import { PostActionsProps, PostType } from "../../types";
 
-const PostActions: FC<PostActionsProps> = ({ refetch, post }: any) => {
+const PostActions: FC<PostActionsProps> = ({ refetch, post }) => {
   const [like] = useToggleLikeMutation({});
-  const toggleLike = (id: any) => {
-    like(id);
-    setTimeout(() => {
-      refetch();
-    }, 100);
-  };
   const dispatch = useDispatch();
-  const saved = useSelector((state: any) => state.saved);
+  const saved = useSelector(
+    (state: { saved: { value: PostType[] } }) => state.saved
+  );
 
   const user = JSON.parse(localStorage.getItem("user")!);
   const isLiked = post?.likes?.includes(user._id);
+
+  const toggleLike = (id: string) => {
+    like(id);
+    setTimeout(() => {
+      refetch?.();
+    }, 100);
+  };
 
   return (
     <div>
@@ -55,7 +58,7 @@ const PostActions: FC<PostActionsProps> = ({ refetch, post }: any) => {
         </div>
         <div className="flex items-center">
           <button onClick={() => dispatch(toggleSave(post))}>
-            {saved.value.find((item: any) => item._id === post._id) ? (
+            {saved.value.find((item) => item._id === post._id) ? (
               <FaBookmark className="mr-1 text-xl" />
             ) : (
               <FaRegBookmark className="mr-1 text-xl" />
