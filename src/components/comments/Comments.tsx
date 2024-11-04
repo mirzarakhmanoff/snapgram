@@ -1,16 +1,7 @@
 import { FaHeart } from "react-icons/fa";
 import SkeletonLoader from "../../pages/singlePostPage/SkeletonLoader";
 import React from "react";
-
-interface CommentsProps {
-  comments: {
-    user: { fullName: string };
-    message: string;
-    createdAt: string;
-    likes: number;
-  }[];
-  isLoading: boolean;
-}
+import { CommentsProps } from "../../types";
 
 const Comments: React.FC<CommentsProps> = ({ comments, isLoading }) => {
   return (

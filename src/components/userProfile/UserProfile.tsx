@@ -1,19 +1,6 @@
 import { Link } from "react-router-dom";
 import avatar from "../../assets/avatarka.jpg";
-
-interface UserData {
-  username: string;
-  fullName?: string;
-  photo?: string;
-  createdAt?: string;
-}
-
-interface UserProfileProps {
-  userData: UserData;
-  linkPrefix?: string;
-  showFullName?: boolean;
-  showDate?: boolean;
-}
+import { UserProfileProps } from "../../types";
 
 const UserProfile: React.FC<UserProfileProps> = ({
   userData,

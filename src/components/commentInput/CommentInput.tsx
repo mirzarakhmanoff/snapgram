@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { usePostCommentMutation } from "../../redux/api/post-api";
 import profileimg from "../../assets/avatarka.jpg";
-
-interface CommentInputProps {
-  id: string;
-  refetch?: () => void;
-}
+import { CommentInputProps } from "../../types";
 
 const CommentInput: React.FC<CommentInputProps> = ({ id, refetch }) => {
   const [postComment, { isLoading }] = usePostCommentMutation();

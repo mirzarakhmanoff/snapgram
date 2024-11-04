@@ -1,10 +1,5 @@
 import React from "react";
-
-interface SkeletonLoaderProps {
-  width?: string;
-  height?: string;
-  borderRadius?: string;
-}
+import { SkeletonLoaderProps } from "../../types";
 
 const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   width = "100%",

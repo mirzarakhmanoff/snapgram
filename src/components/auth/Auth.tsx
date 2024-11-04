@@ -1,9 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-
-interface AuthProps {
-  children: React.ReactNode;
-}
+import { AuthProps } from "../../types";
 
 const Auth: React.FC<AuthProps> = ({ children }) => {
   const token = localStorage.getItem("token");

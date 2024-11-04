@@ -3,12 +3,7 @@ import { Link } from "react-router-dom";
 import CommentInput from "../commentInput/CommentInput";
 import PostActions from "../postActions/PostActions";
 import UserProfile from "../userProfile/UserProfile";
-
-interface PostItemProps {
-  post: any;
-  setGalleryImage?: (url: string) => void;
-  refetch?: () => void;
-}
+import { PostItemProps } from "../../types";
 
 const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
   const handleImageClick = (imageUrl: string) => {

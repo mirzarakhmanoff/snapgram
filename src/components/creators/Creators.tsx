@@ -6,13 +6,7 @@ import {
 import { FC } from "react";
 
 import profileimg from "../../assets/avatarka.jpg";
-
-interface CreatorsProps {
-  creators: any[];
-  error: any;
-  isLoading: boolean;
-  title: string;
-}
+import { CreatorsProps } from "../../types";
 
 const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
   const [follow] = useFollowMutation();

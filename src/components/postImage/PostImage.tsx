@@ -2,19 +2,7 @@ import React from "react";
 import SkeletonLoader from "../../pages/singlePostPage/SkeletonLoader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-
-interface ContentItem {
-  type: "IMAGE" | "VIDEO";
-  url: string;
-}
-
-interface PostImageProps {
-  data: {
-    content: ContentItem[];
-  };
-  isLoading: boolean;
-  id: any;
-}
+import { PostImageProps } from "../../types";
 
 const PostImage: React.FC<PostImageProps> = ({ data, isLoading, id }) => {
   const pagination = {

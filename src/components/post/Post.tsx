@@ -3,24 +3,7 @@ import "swiper/css/navigation";
 import { useState } from "react";
 import PostSkeleton from "./PostSkeleton";
 import PostItem from "../PostItem/Postitem";
-
-interface PostType {
-  _id: string;
-  caption: string;
-  content_alt: string;
-  createdAt: string;
-  content: [
-    {
-      url: string;
-      type: "AUDIO" | "VIDEO" | "IMAGE";
-    }
-  ];
-  likes_count: number;
-  comments_count: number;
-  shares_count: number;
-  owner: any;
-  photo: string;
-}
+import { PostType } from "../../types";
 
 function Post({
   data,
