@@ -9,7 +9,7 @@ const Followers = () => {
   const count = data?.followers?.length || 0;
 
   return (
-    <div className="mt-[50px] flex flex-col items-center justify-center  h-screen">
+    <div className="mt-[50px] flex flex-col    h-screen">
       {count <= 0 ? (
         <div className="flex flex-col items-center text-gray-300">
           <p className="text-center text-lg mb-4 max-w-md">
@@ -24,7 +24,7 @@ const Followers = () => {
           </Link>
         </div>
       ) : (
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col ">
           {data?.followers.map((item: any) => (
             <FollowersItem key={item.id} data={item} count={count} />
           ))}

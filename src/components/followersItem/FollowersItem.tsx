@@ -24,7 +24,7 @@ const FollowersItem = ({ data, count }: any) => {
           <p className="text-white text-3xl">Salom</p>
         </div>
       ) : (
-        <div className="flex items-center p-5 bg-gray-800 shadow-lg rounded-xl max-w-md ml-[50px] mb-6 transform hover:scale-105 transition-transform duration-200">
+        <div className="flex items-center p-5 bg-gray-800 shadow-lg rounded-xl max-w-md ml-[50px] mb-6 transform transition-transform duration-200">
           <Link
             to={`/profile/${data?.username}`}
             className="flex items-center space-x-4"
