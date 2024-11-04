@@ -1,3 +1,5 @@
+// types.ts
+
 export interface CounterState {
   value: number;
 }
@@ -58,12 +60,7 @@ export interface PostType {
   caption: string;
   content_alt: string;
   createdAt: string;
-  content: [
-    {
-      url: string;
-      type: "AUDIO" | "VIDEO" | "IMAGE";
-    }
-  ];
+  content: ContentItem[];
   likes: string[];
   comments: string[];
   shares_count: number;
@@ -88,7 +85,7 @@ export interface PostImageProps {
 }
 
 export interface PostItemProps {
-  post: any;
+  post: PostType;
   setGalleryImage?: (url: string) => void;
   refetch?: () => void;
 }
@@ -138,12 +135,12 @@ export interface PostActionsProps {
 export interface PosterProps {
   data: PostType[];
   offSet: number;
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 export interface PostsProps {
   userId: string | undefined;
-  isloading: boolean | undefined;
+  isloading?: boolean | undefined;
   data: {
     username: string;
   };
