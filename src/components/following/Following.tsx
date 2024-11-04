@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useGetuserProfileQuery } from "../../redux/api/register-api";
 import FollowersItem from "../followersItem/FollowersItem";
+import { Follower } from "../../types";
 
 const Following = () => {
   const { username } = useParams();
@@ -25,8 +26,8 @@ const Following = () => {
         </div>
       ) : (
         <div className="w-full items-start justify-start ">
-          {data?.following.map((item: any) => (
-            <FollowersItem key={item.id} data={item} count={count} />
+          {data?.following.map((item: Follower) => (
+            <FollowersItem key={item._id} data={item} count={count} />
           ))}
         </div>
       )}

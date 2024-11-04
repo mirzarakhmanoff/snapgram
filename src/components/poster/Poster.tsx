@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaHeart, FaRegComment } from "react-icons/fa";
 import SkeletonLoader from "../../pages/singlePostPage/SkeletonLoader";
+import { FC } from "react";
+import { PosterProps } from "../../types";
 
-const Poster = ({ data, offSet, isLoading }: any) => {
+const Poster: FC<PosterProps> = ({ data, offSet, isLoading }) => {
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

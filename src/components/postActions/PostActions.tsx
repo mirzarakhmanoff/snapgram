@@ -9,8 +9,10 @@ import {
 import { useToggleLikeMutation } from "../../redux/api/post-api";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSave } from "../../redux/slice/saved-slice";
+import { FC } from "react";
+import { PostActionsProps } from "../../types";
 
-const PostActions = ({ refetch, post }: any) => {
+const PostActions: FC<PostActionsProps> = ({ refetch, post }: any) => {
   const [like] = useToggleLikeMutation({});
   const toggleLike = (id: any) => {
     like(id);

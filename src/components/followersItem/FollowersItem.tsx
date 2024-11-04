@@ -3,6 +3,7 @@ import {
   useFollowMutation,
   useUnfollowMutation,
 } from "../../redux/api/register-api";
+import { Follower } from "../../types";
 
 const FollowersItem = ({ data, count }: any) => {
   const currentUser = JSON.parse(localStorage.getItem("user") as string);
@@ -49,7 +50,7 @@ const FollowersItem = ({ data, count }: any) => {
             ) : (
               <>
                 {data?.followers?.some(
-                  (follower: any) => follower._id === currentUser._id
+                  (follower: Follower) => follower._id === currentUser._id
                 ) ? (
                   <button
                     onClick={() => unfollowUser(data.username)}

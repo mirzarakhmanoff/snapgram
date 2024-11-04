@@ -76,12 +76,14 @@ export interface ContentItem {
   url: string;
 }
 
+export interface PostImageData {
+  content: ContentItem[];
+}
+
 export interface PostImageProps {
-  data: {
-    content: ContentItem[];
-  };
+  data: PostImageData;
   isLoading: boolean;
-  id: any;
+  id: string;
 }
 
 export interface PostItemProps {
@@ -108,4 +110,33 @@ export interface SkeletonLoaderProps {
   width?: string;
   height?: string;
   borderRadius?: string;
+}
+
+export interface Follower {
+  _id: string;
+  username: string;
+  firstname: string;
+  photo?: string;
+}
+
+// Removed duplicate PostData declaration
+export interface PostData {
+  posts: PostType[];
+}
+
+export interface PostProps {
+  data: PostData;
+  loading: boolean;
+  refetch: () => void;
+}
+
+export interface PostActionsProps {
+  refetch: () => void;
+  post: PostType;
+}
+
+export interface PosterProps {
+  data: PostType[];
+  offSet: number;
+  isLoading: boolean;
 }

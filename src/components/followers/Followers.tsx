@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useGetuserProfileQuery } from "../../redux/api/register-api";
 import FollowersItem from "../followersItem/FollowersItem";
+import { Follower } from "../../types";
 
 const Followers = () => {
   const { username } = useParams();
@@ -25,8 +26,8 @@ const Followers = () => {
         </div>
       ) : (
         <div className="w-full flex flex-col ">
-          {data?.followers.map((item: any) => (
-            <FollowersItem key={item.id} data={item} count={count} />
+          {data?.followers.map((item: Follower) => (
+            <FollowersItem key={item._id} data={item} count={count} />
           ))}
         </div>
       )}

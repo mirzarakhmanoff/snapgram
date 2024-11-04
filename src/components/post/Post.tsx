@@ -3,17 +3,9 @@ import "swiper/css/navigation";
 import { useState } from "react";
 import PostSkeleton from "./PostSkeleton";
 import PostItem from "../PostItem/Postitem";
-import { PostType } from "../../types";
+import { PostProps } from "../../types";
 
-function Post({
-  data,
-  loading,
-  refetch,
-}: {
-  data: any;
-  loading: boolean;
-  refetch: () => void;
-}) {
+function Post({ data, loading, refetch }: PostProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const closeModal = () => {
@@ -32,7 +24,7 @@ function Post({
 
   return (
     <div className="post-list bg-gray-900 p-4">
-      {data?.posts?.map((post: PostType, i: number) => (
+      {data?.posts?.map((post, i) => (
         <PostItem
           post={post}
           key={i}
