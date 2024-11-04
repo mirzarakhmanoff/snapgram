@@ -81,7 +81,7 @@ export interface PostImageData {
 export interface PostImageProps {
   data: PostImageData;
   isLoading: boolean;
-  id: string;
+  id: string | undefined;
 }
 
 export interface PostItemProps {
