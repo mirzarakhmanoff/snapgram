@@ -20,7 +20,6 @@ const PostActions = ({ refetch, post }: any) => {
   };
   const dispatch = useDispatch();
   const saved = useSelector((state: any) => state.saved);
-  console.log(saved);
 
   const user = JSON.parse(localStorage.getItem("user")!);
   const isLiked = post?.likes?.includes(user._id);

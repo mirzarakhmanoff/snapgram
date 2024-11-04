@@ -11,6 +11,7 @@ import SinglePostPage from "../pages/singlePostPage/SinglePostPage";
 import Explore from "../pages/explore/Explore";
 import Followers from "../components/followers/Followers";
 import Following from "../components/following/Following";
+import Saved from "../pages/saved/Saved";
 const Home: LazyExoticComponent<any> = lazy(() => import("../pages/home/Home"));
 const Layout: LazyExoticComponent<any> = lazy(
   () => import("../pages/layout/Layout")
@@ -89,6 +90,14 @@ const Routers = () => {
           element: (
             <Suspense>
               <Following />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/saved",
+          element: (
+            <Suspense>
+              <Saved />
             </Suspense>
           ),
         },

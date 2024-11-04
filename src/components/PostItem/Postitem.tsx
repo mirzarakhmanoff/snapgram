@@ -6,19 +6,19 @@ import UserProfile from "../userProfile/UserProfile";
 
 interface PostItemProps {
   post: any;
-  setGalleryImage: (url: string) => void;
-  refetch: () => void;
+  setGalleryImage?: (url: string) => void;
+  refetch?: () => void;
 }
 
 const PostItem: FC<PostItemProps> = ({ post, setGalleryImage, refetch }) => {
   const handleImageClick = (imageUrl: string) => {
-    setGalleryImage(imageUrl);
+    setGalleryImage?.(imageUrl);
   };
 
   return (
     <div
       key={post._id}
-      className="twitter-post bg-gray-800 shadow-md rounded-lg p-4 mb-6 w-full max-w-md sm:max-w-lg lg:max-w-2xl mx-auto"
+      className="twitter-post  bg-gray-800 shadow-md rounded-lg p-4 mb-6 w-full max-w-md sm:max-w-lg lg:max-w-2xl mx-auto"
     >
       <UserProfile
         userData={{
