@@ -142,7 +142,8 @@ export interface PosterProps {
 }
 
 export interface PostsProps {
-  userId: string;
+  userId: string | undefined;
+  isloading: boolean | undefined;
   data: {
     username: string;
   };
