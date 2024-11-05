@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Poster from "../../components/poster/Poster";
+import { useAppSelector } from "../../redux";
 
 const Saved = () => {
-  const savedPosts = JSON.parse(localStorage.getItem("saved")!);
-  console.log(savedPosts);
   const [offSet] = useState(20);
-
+  const saved = useAppSelector((state) => state.saved);
+  useEffect(() => {
+    console.log(saved);
+  }, [saved]);
   return (
     <div className="flex flex-wrap mt-[50px] ml-[100px] items-start justify-start gap-5">
-      {savedPosts?.map((post: any) => (
-        <div key={post._id}>
-          <Poster data={savedPosts} offSet={offSet} />
-        </div>
-      ))}
+      {/* {savedPosts?.map((post: any) => ( */}
+      <div>
+        <Poster data={saved.value} offSet={offSet} />
+      </div>
+      {/* ))} */}
     </div>
   );
 };

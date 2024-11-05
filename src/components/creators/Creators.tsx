@@ -6,7 +6,7 @@ import {
 import { FC } from "react";
 
 import profileimg from "../../assets/avatarka.jpg";
-import { CreatorsProps } from "../../types";
+import { CreatorsProps, Follower } from "../../types";
 
 const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
   const [follow] = useFollowMutation();
@@ -92,7 +92,7 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
               </p>
 
               {user.followers?.some(
-                (follower: any) => follower._id === currentUserId
+                (follower: Follower) => follower._id === currentUserId
               ) ? (
                 <button
                   onClick={() => unfollowUser(user.username)}

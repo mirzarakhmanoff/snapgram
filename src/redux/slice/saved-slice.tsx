@@ -22,9 +22,12 @@ export const savedSlice = createSlice({
       }
       saveStorage("saved", state.value);
     },
+    setSavedItems: (state) => {
+      state.value = JSON.parse(localStorage.getItem("saved")!);
+    },
   },
 });
 
-export const { toggleSave } = savedSlice.actions;
+export const { toggleSave, setSavedItems } = savedSlice.actions;
 
 export default savedSlice.reducer;
