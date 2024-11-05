@@ -37,7 +37,11 @@ const SinglePostPage = () => {
 
         <div className="flex-1">
           <div className="flex">
-            <PostImage data={data} isLoading={isLoading} id={id} />
+            <div>
+              <PostImage data={data} isLoading={isLoading} id={id} />
+              <PostActions refetch={fetching} post={data} />
+              <CommentInput id={String(data?._id)} refetch={refetch} />
+            </div>
 
             <div className="flex flex-col justify-start ml-6 mt-6   p-4">
               <div className="mb-4">
@@ -67,8 +71,6 @@ const SinglePostPage = () => {
               <div className=" border border-gray-500 rounded-lg p-4 ">
                 <Comments comments={comments} isLoading={isLoading} />
               </div>
-              <PostActions refetch={fetching} post={data} />
-              <CommentInput id={String(data?._id)} refetch={refetch} />
             </div>
           </div>
         </div>

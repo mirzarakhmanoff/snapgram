@@ -118,20 +118,38 @@ const Profile: React.FC = () => {
           <span>Posts</span>
         </div>
         <div>
-          <Link to={`/followers/${data.username}`}>
-            <span className="block text-lg font-bold text-white">
-              {data?.followers.length}
-            </span>
-            <span>Followers</span>
-          </Link>
+          {data.followers.length <= 0 ? (
+            <div>
+              <span className="block text-lg font-bold text-white">
+                {data?.followers.length}
+              </span>
+              <span>Followers</span>
+            </div>
+          ) : (
+            <Link to={`/followers/${data.username}`}>
+              <span className="block text-lg font-bold text-white">
+                {data?.followers.length}
+              </span>
+              <span>Followers</span>
+            </Link>
+          )}
         </div>
         <div>
-          <Link to={`/following/${data.username}`}>
-            <span className="block text-lg font-bold text-white">
-              {data?.following.length}
-            </span>
-            <span>Following</span>
-          </Link>
+          {data.following.length <= 0 ? (
+            <div>
+              <span className="block text-lg font-bold text-white">
+                {data?.followers.length}
+              </span>
+              <span>Following</span>
+            </div>
+          ) : (
+            <Link to={`/following/${data.username}`}>
+              <span className="block text-lg font-bold text-white">
+                {data?.following.length}
+              </span>
+              <span>Following</span>
+            </Link>
+          )}
         </div>
       </div>
 

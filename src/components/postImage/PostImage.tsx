@@ -14,11 +14,11 @@ const PostImage: React.FC<PostImageProps> = ({ data, isLoading, id }) => {
 
   return (
     <div>
-      <div className="flex-1 mt-[50px]">
+      <div className="flex-1 ">
         {isLoading ? (
           <SkeletonLoader width="600px" height="450px" borderRadius="15px" />
         ) : (
-          <div className="image-container max-w-[600px] h-[500px] mt-[50px] w-full flex items-center justify-center mx-auto">
+          <div className="image-container max-w-[600px] h-[500px]  w-full flex items-center justify-center mx-auto">
             <Swiper
               modules={[Pagination, Navigation]}
               pagination={pagination}

@@ -18,7 +18,7 @@ const Poster: FC<PosterProps> = ({ data, offSet, isLoading }) => {
                 key={post._id}
               >
                 <div className="relative group overflow-hidden rounded-lg bg-gray-800 shadow-lg h-[300px]">
-                  {post.content[0].type === "IMAGE" ? (
+                  {post?.content[0]?.type === "IMAGE" ? (
                     <img
                       src={post.content[0].url}
                       alt={`Post content 1`}
@@ -28,7 +28,7 @@ const Poster: FC<PosterProps> = ({ data, offSet, isLoading }) => {
                     <video
                       controls
                       className="w-full h-full rounded-lg object-cover"
-                      src={post.content[0].url}
+                      src={post?.content[0]?.url}
                     />
                   )}
 

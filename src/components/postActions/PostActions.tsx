@@ -31,7 +31,7 @@ const PostActions: FC<PostActionsProps> = ({ refetch, post }) => {
 
   return (
     <div>
-      <div className="post-actions flex gap-3 justify-between text-gray-400 mb-4 text-xs sm:text-sm">
+      <div className="post-actions flex gap-3 justify-between text-gray-400 mb-4 text-xs sm:text-sm mt-[20px]">
         <div className="flex gap-3">
           <div className="flex items-center">
             <button onClick={() => toggleLike(post._id)}>
@@ -58,7 +58,7 @@ const PostActions: FC<PostActionsProps> = ({ refetch, post }) => {
         </div>
         <div className="flex items-center">
           <button onClick={() => dispatch(toggleSave(post))}>
-            {saved.value.find((item) => item._id === post._id) ? (
+            {saved?.value?.find((item) => item?._id === post?._id) ? (
               <FaBookmark className="mr-1 text-xl" />
             ) : (
               <FaRegBookmark className="mr-1 text-xl" />
