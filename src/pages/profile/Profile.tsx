@@ -138,7 +138,7 @@ const Profile: React.FC = () => {
           {data.following.length <= 0 ? (
             <div>
               <span className="block text-lg font-bold text-white">
-                {data?.followers.length}
+                {data?.following.length}
               </span>
               <span>Following</span>
             </div>
