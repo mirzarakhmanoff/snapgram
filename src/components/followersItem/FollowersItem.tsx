@@ -4,7 +4,7 @@ import {
   useUnfollowMutation,
 } from "../../redux/api/register-api";
 import { Follower } from "../../types";
-
+import avatarka from "../../assets/avatarka.jpg";
 const FollowersItem = ({ data, count }: any) => {
   const currentUser = JSON.parse(localStorage.getItem("user") as string);
   const [follow] = useFollowMutation();
@@ -31,7 +31,7 @@ const FollowersItem = ({ data, count }: any) => {
             className="flex items-center space-x-4"
           >
             <img
-              src={data?.photo || "https://via.placeholder.com/50"}
+              src={data?.photo.includes("https") ? data?.photo : avatarka}
               alt={data?.username}
               className="w-14 h-14 rounded-full border-2 border-gray-700 shadow-sm"
             />
