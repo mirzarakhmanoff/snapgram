@@ -57,7 +57,12 @@ const PostActions: FC<PostActionsProps> = ({ refetch, post }) => {
           </div>
         </div>
         <div className="flex items-center">
-          <button onClick={() => dispatch(toggleSave(post))}>
+          <button
+            onClick={() => {
+              dispatch(toggleSave(post));
+              console.log(saved);
+            }}
+          >
             {saved?.value?.find((item) => item?._id === post?._id) ? (
               <FaBookmark className="mr-1 text-xl" />
             ) : (

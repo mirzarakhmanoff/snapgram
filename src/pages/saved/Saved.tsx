@@ -10,11 +10,9 @@ const Saved = () => {
   }, [saved]);
   return (
     <div className="flex flex-wrap mt-[50px] ml-[100px] items-start justify-start gap-5">
-      {/* {savedPosts?.map((post: any) => ( */}
       <div>
         <Poster data={saved.value} offSet={offSet} />
       </div>
-      {/* ))} */}
     </div>
   );
 };

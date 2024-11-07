@@ -12,7 +12,7 @@ const Poster: FC<PosterProps> = ({ data, offSet, isLoading }) => {
           ? Array.from({ length: offSet }).map((_, index) => (
               <SkeletonLoader key={index} height="300px" borderRadius="8px" />
             ))
-          : data.slice(0, offSet).map((post: PostType) => (
+          : data?.slice(0, offSet).map((post: PostType) => (
               <Link
                 to={`/post/${post.owner.username}/${post._id}`}
                 key={post._id}
