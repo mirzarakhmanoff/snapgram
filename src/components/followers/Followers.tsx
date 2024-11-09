@@ -6,7 +6,6 @@ import { Follower } from "../../types";
 const Followers = () => {
   const { username } = useParams();
   const { data } = useGetuserProfileQuery(username);
-  console.log(data);
 
   const count = data?.followers?.length || 0;
 

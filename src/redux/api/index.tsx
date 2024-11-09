@@ -5,6 +5,7 @@ const baseQuery = async (args: any, api: any, extraOptions: any) => {
   // const { dispatch } = api
   const rawBaseQuery = fetchBaseQuery({
     baseUrl: "https://sea-turtle-app-c2icp.ondigitalocean.app",
+    // baseUrl: "http://localhost:5001",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {

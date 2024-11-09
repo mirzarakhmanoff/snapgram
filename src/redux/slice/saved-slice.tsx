@@ -14,9 +14,9 @@ export const savedSlice = createSlice({
         (item: any) => item._id === action.payload._id
       );
       if (!isExist) {
-        state?.value?.push(action.payload);
+        state.value = [...(state?.value || []), action?.payload];
       } else {
-        state.value = state.value.filter(
+        state.value = state?.value.filter(
           (item: any) => item._id !== action.payload._id
         );
       }

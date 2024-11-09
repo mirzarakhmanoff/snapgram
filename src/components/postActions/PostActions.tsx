@@ -60,7 +60,6 @@ const PostActions: FC<PostActionsProps> = ({ refetch, post }) => {
           <button
             onClick={() => {
               dispatch(toggleSave(post));
-              console.log(saved);
             }}
           >
             {saved?.value?.find((item) => item?._id === post?._id) ? (

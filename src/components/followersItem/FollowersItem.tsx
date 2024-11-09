@@ -5,17 +5,19 @@ import {
 } from "../../redux/api/register-api";
 import { Follower } from "../../types";
 import avatarka from "../../assets/avatarka.jpg";
-const FollowersItem = ({ data, count }: any) => {
+const FollowersItem = ({ data, count, refetch }: any) => {
   const currentUser = JSON.parse(localStorage.getItem("user") as string);
   const [follow] = useFollowMutation();
   const [unfollow] = useUnfollowMutation();
 
   const followUser = async (username: string) => {
     await follow(username);
+    refetch();
   };
 
   const unfollowUser = async (username: string) => {
     await unfollow(username);
+    refetch();
   };
 
   return (
@@ -49,8 +51,8 @@ const FollowersItem = ({ data, count }: any) => {
               </button>
             ) : (
               <>
-                {data?.followers?.some(
-                  (follower: Follower) => follower._id === currentUser._id
+                {currentUser?.following.some(
+                  (current: Follower) => current._id === data._id
                 ) ? (
                   <button
                     onClick={() => unfollowUser(data.username)}

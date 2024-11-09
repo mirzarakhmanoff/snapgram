@@ -5,7 +5,7 @@ import { Follower } from "../../types";
 
 const Following = () => {
   const { username } = useParams();
-  const { data } = useGetuserProfileQuery(username);
+  const { data, refetch } = useGetuserProfileQuery(username);
 
   const count = data?.following?.length || 0;
 
@@ -13,7 +13,12 @@ const Following = () => {
     <div className="mt-[50px] flex flex-col items-center h-screen">
       <div className="w-full items-start justify-start ">
         {data?.following.map((item: Follower) => (
-          <FollowersItem key={item._id} data={item} count={count} />
+          <FollowersItem
+            key={item._id}
+            data={item}
+            count={count}
+            refetch={refetch}
+          />
         ))}
       </div>
     </div>
