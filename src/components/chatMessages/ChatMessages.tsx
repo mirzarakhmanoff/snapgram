@@ -13,7 +13,7 @@ interface Message {
 
 const ChatMessages: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
-    { text: "Hey There!", time: "Today, 2:01pm", sender: "contact" },
+    { text: "Hey Theree!", time: "Today, 2:01pm", sender: "contact" },
     { text: "How are you doing?", time: "Today, 2:02pm", sender: "contact" },
     { text: "Hello...", time: "Today, 2:12pm", sender: "user" },
     {
