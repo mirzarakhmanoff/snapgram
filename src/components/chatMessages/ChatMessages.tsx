@@ -22,7 +22,7 @@ const ChatMessages: React.FC = () => {
       sender: "user",
     },
     {
-      text: "I am doing well. Can we meet up tomorrow?",
+      text: "I am doing well. Can we meet up tomorroww?",
       time: "Today, 2:13pm",
       sender: "contact",
     },
