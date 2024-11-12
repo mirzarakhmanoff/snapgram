@@ -8,9 +8,9 @@ const Search = () => {
           <input
             type="text"
             placeholder="Search Creators"
-            className="w-full p-4 pl-10 rounded-full bg-gray-800 text-gray-300 placeholder-gray-500 "
+            className="w-full py-2  px-[35px] md:py-3  rounded-full bg-gray-800 text-gray-300 placeholder-gray-500 "
           />
-          <FaSearch className="absolute left-4  text-gray-500" />
+          <FaSearch className="absolute left-3    text-gray-500" />
         </div>
       </form>
     </div>

@@ -47,8 +47,10 @@ const People = () => {
   }
 
   return (
-    <div className="p-6  ml-[100px]">
-      <Search />
+    <div className="p-6  flex flex-col items-center ml-[10px]">
+      <div className=" w-full  ">
+        <Search />
+      </div>
       <div className="flex items-center justify-center gap-20">
         <Creators
           creators={creators}
@@ -59,7 +61,7 @@ const People = () => {
       </div>
       <div ref={loaderRef} className="w-full h-[50px]" />
       {isFetching && (
-        <div className="flex justify-center my-4 mx-auto h-14 w-[400px]">
+        <div className="flex justify-center my-4 mx-auto h-14 md:w-[400px]">
           <ClipLoader color={"#fff"} size={50} />
         </div>
       )}

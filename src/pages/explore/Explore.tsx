@@ -4,20 +4,31 @@ import SkeletonLoader from "../singlePostPage/SkeletonLoader";
 import Search from "../../components/search/Search";
 import Poster from "../../components/poster/Poster";
 
-const hashtags = ["mountains", "webdevelopment", "funny", "modeling"];
+const hashtags = [
+  "mountains",
+  "webdevelopment",
+  "funny",
+  "modeling",
+  "funny",
+  "modeling",
+];
 
 const Explore = () => {
   const { data, isLoading } = useGetAllPostsQuery({ limit: 20 });
   const [offSet, setOffSet] = useState(20);
 
   return (
-    <div className="min-h-screen bg-black text-white px-6 py-8 mx-auto ml-[100px]">
+    <div className="min-h-screen bg-black text-white px-6 py-8 mx-auto ml-[60px] ">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Search Hashtags</h1>
+        <h1 className="md:text-4xl font-bold md:mb-8 mb-2 text-center ">
+          Search Hashtags
+        </h1>
 
-        <Search />
+        <div className="mb-3 w-full h-full">
+          <Search />
+        </div>
 
-        <div className="flex flex-wrap gap-3 mb-10 justify-center">
+        <div className="flex  gap-3 mb-10  w-full  h-[30px] overflow-scroll  ">
           {hashtags.map((tag) => (
             <span
               key={tag}
