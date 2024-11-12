@@ -53,7 +53,7 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
   };
 
   return (
-    <div className="bg-black p-6 max-w-[1200px]">
+    <div className="bg-black  ml-[30px] md:ml-[0px] md:p-6 max-w-[1200px]">
       <h2 className="text-2xl text-white mb-4 md:ml-[50px]">{title}</h2>
 
       {isLoading ? (
@@ -65,7 +65,7 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
             ))}
         </div>
       ) : (
-        <div className="flex flex-wrap gap-5 items-center justify-center ">
+        <div className="flex flex-wrap gap-5 items-center w-full ">
           {creators?.map((user: any) => (
             <div
               key={user._id}

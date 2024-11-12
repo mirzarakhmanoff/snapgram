@@ -47,7 +47,7 @@ const People = () => {
   }
 
   return (
-    <div className="p-6  flex flex-col items-center ml-[10px]">
+    <div className="p-2 md:p-6  flex flex-col items-center ml-[10px]">
       <div className=" w-full  ">
         <Search />
       </div>
