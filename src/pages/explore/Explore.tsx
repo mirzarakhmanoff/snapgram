@@ -18,7 +18,7 @@ const Explore = () => {
   const [offSet, setOffSet] = useState(20);
 
   return (
-    <div className="min-h-screen bg-black text-white px-6 py-8 mx-auto ml-[60px] ">
+    <div className="min-h-screen bg-black text-white px-6 py-8 mx-auto md:ml-[300px] ">
       <div className="max-w-6xl mx-auto">
         <h1 className="md:text-4xl font-bold md:mb-8 mb-2 text-center ">
           Search Hashtags

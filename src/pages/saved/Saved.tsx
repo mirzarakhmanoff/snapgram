@@ -9,7 +9,7 @@ const Saved = () => {
     console.log(saved);
   }, [saved]);
   return (
-    <div className="flex flex-wrap mt-[50px] ml-[30px] items-start justify-start gap-5">
+    <div className="flex flex-wrap mt-[50px] mx-[20px] md:ml-[300px] items-start justify-start gap-5 ">
       <div>
         <Poster data={saved.value} offSet={offSet} />
       </div>

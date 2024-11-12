@@ -33,7 +33,7 @@ const Stories = () => {
   }, []);
 
   return (
-    <div className="flex gap-4 my-[30px] max-[705px]:items-center mx-auto justify-center">
+    <div className="flex gap-4  max-[705px]:items-center mx-auto justify-center overflow-scroll">
       {isLoading
         ? Array(6)
             .fill(0)
@@ -41,7 +41,7 @@ const Stories = () => {
         : users.map((user) => (
             <div
               key={user.id}
-              className="border-4 border-[#685DFF] w-[72px] h-[72px] rounded-full overflow-hidden cursor-pointer"
+              className="border-4 border-[#685DFF] max-w-[72px]  rounded-full overflow-hidden cursor-pointer"
             >
               <img
                 src={user.img}

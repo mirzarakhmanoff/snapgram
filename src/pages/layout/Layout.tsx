@@ -4,10 +4,8 @@ import SideBar from "../../components/SideBar/SideBar";
 const Layout = () => {
   return (
     <div className="flex items-center justify-center">
-      <div className="w-[90px]  md:w-[300px]">
-        <SideBar />
-      </div>
-      <div className="w-full ">
+      <SideBar />
+      <div className="w-full relative ">
         <Outlet />
       </div>
     </div>

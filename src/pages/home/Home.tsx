@@ -29,19 +29,14 @@ const Home = () => {
     };
   }, [navigate]);
 
-  // if (error) {
-  //   navigate("/login");
-  //   return null;
-  // }
-
   return (
-    <div className="flex bg-black">
-      <div className="flex-1 ml-[100px] md:ml-[50px]  rounded-lg text-[#001011] md:mr-[465px] pt-6">
+    <div className="flex flex-col md:flex-row bg-black">
+      <div className="flex-1 md:ml-[300px] ml-0 rounded-lg text-[#001011] md:mr-[465px] pt-6">
         <Stories />
         <HomeFeed />
       </div>
 
-      <div className="hidden lg:block w-[465px]  h-screen fixed overflow-scroll right-0 top-0">
+      <div className="hidden md:block md:w-[250px] lg:w-[350px] xl:w-[465px] h-screen fixed overflow-scroll right-0 top-0">
         <Creators
           creators={creators}
           error={error}

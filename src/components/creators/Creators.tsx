@@ -31,7 +31,7 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
   }
 
   const SkeletonLoader = () => (
-    <div className="bg-gray-700 animate-pulse rounded-lg p-4 flex flex-col items-center text-center w-[180px] h-[280px]">
+    <div className="bg-gray-700 animate-pulse rounded-lg p-4 flex flex-col items-center text-center w-[160px] md:w-[180px] h-[280px]">
       <div className="w-24 h-24 bg-gray-600 rounded-full mb-4"></div>
       <div className="w-16 h-4 bg-gray-600 mb-2"></div>
       <div className="w-32 h-4 bg-gray-600 mb-4"></div>
@@ -53,8 +53,8 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
   };
 
   return (
-    <div className="bg-black  ml-[30px] md:ml-[0px] md:p-6 max-w-[1200px]">
-      <h2 className="text-2xl text-white mb-4 md:ml-[50px]">{title}</h2>
+    <div className="bg-black m-[0] mx-auto  flex flex-col items-start justify-start    md:p-6 max-w-[1200px] ">
+      <h2 className="text-2xl text-white mb-4 ml-4 ">{title}</h2>
 
       {isLoading ? (
         <div className="flex flex-wrap gap-5 items-center justify-between">
@@ -65,14 +65,14 @@ const Creators: FC<CreatorsProps> = ({ creators, error, isLoading, title }) => {
             ))}
         </div>
       ) : (
-        <div className="flex flex-wrap gap-5 items-center w-full ">
+        <div className="flex flex-wrap gap-5 items-center  w-full ">
           {creators?.map((user: any) => (
             <div
               key={user._id}
-              className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center w-[180px]"
+              className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center w-[160px] md:w-[180px] mx-auto"
             >
               <Link to={`/profile/${user?.username}`}>
-                <div className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center w-[180px]">
+                <div className="bg-gray-800 rounded-lg p-4 flex flex-col items-center text-center w-[160px] md:w-[180px]">
                   <img
                     src={
                       user?.photo?.includes("https") ? user?.photo : profileimg
