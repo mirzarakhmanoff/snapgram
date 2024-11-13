@@ -17,7 +17,6 @@ import icon9 from "../../assets/Wallpaper.svg";
 import { useGetProfileQuery } from "../../redux/api/register-api";
 import { Dialog } from "@mui/material";
 import { useState } from "react";
-import avatar from "../../assets/avatarka.jpg";
 import UserProfile from "../userProfile/UserProfile";
 
 const SideBar = () => {
