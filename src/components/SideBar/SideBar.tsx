@@ -18,6 +18,7 @@ import { useGetProfileQuery } from "../../redux/api/register-api";
 import { Dialog } from "@mui/material";
 import { useState } from "react";
 import avatar from "../../assets/avatarka.jpg";
+import UserProfile from "../userProfile/UserProfile";
 
 const SideBar = () => {
   const [open, setOpen] = useState(false);
@@ -44,10 +45,14 @@ const SideBar = () => {
       </div>
       <div className="md:block hidden">
         <Link to={`/profile/${user.username}`}>
-          <img
-            src={user.photo?.includes("https") ? user.photo : avatar}
-            alt="Profile"
-            className="w-8 h-8 border rounded-full object-cover"
+          <UserProfile
+            userData={{
+              username: user.username,
+              photo: user.photo,
+              createdAt: user.fullName,
+            }}
+            showFullName={false}
+            showDate={true}
           />
         </Link>
       </div>

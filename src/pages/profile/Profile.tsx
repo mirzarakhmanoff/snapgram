@@ -64,7 +64,7 @@ const Profile: React.FC = () => {
 
   return (
     <div className="bg-black text-white min-h-screen p-6 absolute md:left-[300px]">
-      <div className="flex  space-x-6 flex-col md:flex-row items-start justify-center ">
+      <div className="flex  space-x-6 flex-col md:flex-row items-start justify-center md:justify-start md:items-center ">
         <div className="flex gap-2 items-center justify-center ">
           <div className="md:w-20 md:h-20 w-14 h-12 mb-3 border rounded-full bg-white overflow-hidden flex justify-center items-center">
             <img
