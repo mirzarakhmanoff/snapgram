@@ -20,7 +20,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
             className="w-12 h-12 border rounded-full object-cover"
           />
 
-          <div className="hidden sm:block">
+          <div>
             {showFullName && (
               <h5 className="text-[12px] font-semibold text-white">
                 {fullName || "Unknown User"}
