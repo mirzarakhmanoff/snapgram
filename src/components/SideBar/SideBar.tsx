@@ -43,12 +43,12 @@ const SideBar = () => {
         </Link>
       </div>
       <div className="md:block hidden">
-        <Link to={`/profile/${user.username}`}>
+        <Link to={`/profile/${user?.username}`}>
           <UserProfile
             userData={{
-              username: user.username,
-              photo: user.photo,
-              createdAt: user.fullName,
+              username: user?.username,
+              photo: user?.photo,
+              createdAt: user?.fullName,
             }}
             showFullName={false}
             showDate={true}
